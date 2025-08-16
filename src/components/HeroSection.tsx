@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Linkedin, Mail, FileText } from "lucide-react";
 const HeroSection = () => {
-  return <section className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-background via-background to-accent/10">
+  return <section className="min-h-screen flex items-center justify-center p-6 pb-8 bg-gradient-to-br from-background via-background to-accent/10">
       <div className="max-w-4xl mx-auto text-center space-y-8">
         {/* Profile Avatar */}
         <div className="relative">
