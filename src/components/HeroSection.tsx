@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Linkedin, Mail, FileText } from "lucide-react";
 
 const HeroSection = () => {
@@ -9,6 +9,7 @@ const HeroSection = () => {
         {/* Profile Avatar */}
         <div className="relative">
           <Avatar className="w-32 h-32 mx-auto border-4 border-primary/20 shadow-glow transition-all duration-500 hover:scale-105">
+            <AvatarImage src="/lovable-uploads/00d98ff0-cea1-495b-a987-33713991e19b.png" alt="Tommy Lisiak" />
             <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-primary to-accent text-primary-foreground">
               TL
             </AvatarFallback>
