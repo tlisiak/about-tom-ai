@@ -12,9 +12,7 @@ const HeroSection = () => {
               TL
             </AvatarFallback>
           </Avatar>
-          <div className="absolute -bottom-2 -right-2 text-3xl animate-bounce">
-            👋
-          </div>
+          
         </div>
 
         {/* Hero Title */}
