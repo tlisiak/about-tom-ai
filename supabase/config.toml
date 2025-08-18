@@ -1,1 +1,4 @@
 project_id = "caslaexiylowkwssldcw"
+
+[functions.chat-with-tommy]
+verify_jwt = false

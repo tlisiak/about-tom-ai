@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Send, Bot, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 interface Message {
   id: number;
   text: string;
@@ -24,58 +25,49 @@ const ChatBot = () => {
     toast
   } = useToast();
 
-  // Pre-defined responses based on Tommy's background
-  const getResponse = (question: string): string => {
-    const q = question.toLowerCase();
-    if (q.includes("experience") || q.includes("background") || q.includes("work")) {
-      return "I have extensive experience in product leadership across climate tech companies. I'm currently Head of Product at Scout (AI-powered tools for funding), previously worked at Inspire Clean Energy (acquired by Shell), Washington Post's Zeus Technology, and Arcadia (now a unicorn startup). I've led teams of 10+ engineers and launched multiple successful products.";
-    }
-    if (q.includes("scout") || q.includes("current") || q.includes("job")) {
-      return "I'm currently the Head of Product at Scout, where we're building AI-powered tools to help socially responsible businesses win non-dilutive funding. Scout combines expert grant writers with intelligent software to streamline the grant discovery, writing, and collaboration process.";
-    }
-    if (q.includes("climate") || q.includes("sustainability") || q.includes("environment")) {
-      return "I'm passionate about climate tech and sustainability. At Inspire Clean Energy, my work contributed to diverting over 5.6 billion pounds of CO₂e. I focus on blending innovation with sustainability to drive impactful change in everything I build.";
-    }
-    if (q.includes("leadership") || q.includes("team") || q.includes("manage")) {
-      return "My leadership approach balances operational excellence with strategic vision. I believe in fostering strong collaboration, clarity, and motivation to create environments where people can do their most innovative work. I've led teams of 10+ engineers and scaled products from startups to enterprise level.";
-    }
-    if (q.includes("webby") || q.includes("award") || q.includes("voice") || q.includes("alexa")) {
-      return "Earlier in my career, I explored voice AI, building dozens of products for Amazon Alexa and Google Assistant. I partnered with Fortune 500 companies and won a Webby Award for my work on 'Bravo Tango Brain Training' in the Best Use of Machine Learning category.";
-    }
-    if (q.includes("hobby") || q.includes("interest") || q.includes("soccer") || q.includes("personal")) {
-      return "Outside of work, I'm passionate about soccer and you'll often catch me wearing my Vans Classics. I approach challenges with curiosity, excitement, and empathy, and I'm usually smiling whether on Zoom or in the office!";
-    }
-    if (q.includes("contact") || q.includes("reach") || q.includes("email") || q.includes("linkedin")) {
-      return "You can reach me via email at tommylisiak@gmail.com or connect with me on LinkedIn at linkedin.com/in/tommylisiak/. I'm always open to connecting with fellow innovators and discussing opportunities in climate tech!";
-    }
-    if (q.includes("education") || q.includes("school") || q.includes("university")) {
-      return "Great question! While I haven't included detailed educational background here, my extensive experience across product leadership roles at top companies and technical expertise reflect a strong foundation. Feel free to reach out directly for more details about my educational journey!";
-    }
-    if (q.includes("inspire") || q.includes("shell")) {
-      return "At Inspire Clean Energy (acquired by Shell), I spearheaded the modernization of their digital tech stack, leading to a 100+% increase in web conversion rates and enhanced user experience. My work contributed to diverting over 5.6 billion pounds of CO₂e.";
-    }
-    if (q.includes("arcadia") || q.includes("utility") || q.includes("data")) {
-      return "At Arcadia (now a startup unicorn), I led the development of over 200 utility data acquisition services, empowering clean energy adoption across the U.S. Think of it as Plaid, but for utilities—unlocking access to energy data for climate innovators.";
-    }
+  // AI-powered response using OpenAI
+  const getAIResponse = async (question: string): Promise<string> => {
+    try {
+      console.log('Sending message to AI:', question);
+      
+      const { data, error } = await supabase.functions.invoke('chat-with-tommy', {
+        body: { message: question }
+      });
 
-    // Default response
-    return "That's a great question! While I've shared quite a bit about my professional background in product leadership and climate tech, I might not have covered that specific topic here. Feel free to reach out to me directly at tommylisiak@gmail.com or on LinkedIn for more detailed insights. Is there anything else about my experience at Scout, climate tech work, or product leadership that I can help with?";
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      console.log('Received AI response:', data);
+      return data.response || "I'm sorry, I couldn't generate a response. Please try again.";
+    } catch (error) {
+      console.error('Error calling AI:', error);
+      toast({
+        title: "Connection Error",
+        description: "Unable to connect to the AI assistant. Please try again.",
+        variant: "destructive",
+      });
+      return "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
+    }
   };
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
+    
     const userMessage: Message = {
       id: messages.length + 1,
       text: inputValue.trim(),
       isUser: true,
       timestamp: new Date()
     };
+    
     setMessages(prev => [...prev, userMessage]);
+    const currentMessage = inputValue.trim();
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate AI thinking time
-    setTimeout(() => {
-      const response = getResponse(inputValue.trim());
+    try {
+      const response = await getAIResponse(currentMessage);
       const aiMessage: Message = {
         id: messages.length + 2,
         text: response,
@@ -83,8 +75,11 @@ const ChatBot = () => {
         timestamp: new Date()
       };
       setMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      console.error('Error in handleSendMessage:', error);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
