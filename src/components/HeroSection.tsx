@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Linkedin, Mail, FileText } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+
 const HeroSection = () => {
+  const { toast } = useToast();
+
   return <section className="min-h-screen flex items-center justify-center p-6 pb-8 bg-gradient-to-br from-background via-background to-accent/10">
       <div className="max-w-4xl mx-auto text-center space-y-8">
         {/* Profile Avatar */}
@@ -45,8 +49,19 @@ const HeroSection = () => {
             </a>
           </Button>
           
-          <Button variant="outline" size="lg" className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105" asChild>
-            
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+            onClick={() => {
+              toast({
+                title: "Coming soon!",
+                description: "Red Fox Labs website is under development.",
+              });
+            }}
+          >
+            <FileText className="w-5 h-5 mr-2" />
+            Red Fox Labs
           </Button>
         </div>
 
