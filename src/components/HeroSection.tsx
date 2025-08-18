@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Linkedin, Mail, FileText } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { Linkedin, Mail, Zap } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const HeroSection = () => {
   const { toast } = useToast();
@@ -52,7 +52,7 @@ const HeroSection = () => {
           <Button 
             variant="outline" 
             size="lg" 
-            className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+            className="border-red-500/40 text-red-600 hover:border-red-500 hover:bg-red-500/10 hover:text-red-700 transition-all duration-300 hover:scale-105"
             onClick={() => {
               toast({
                 title: "Coming soon!",
@@ -60,7 +60,7 @@ const HeroSection = () => {
               });
             }}
           >
-            <FileText className="w-5 h-5 mr-2" />
+            <Zap className="w-5 h-5 mr-2" />
             Red Fox Labs
           </Button>
         </div>
