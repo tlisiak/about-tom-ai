@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Send, Bot, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import ReactMarkdown from "react-markdown";
 interface Message {
   id: number;
   text: string;
@@ -108,7 +109,9 @@ const ChatBot = () => {
                     </Avatar>}
                   
                   <div className={`max-w-[80%] p-3 rounded-2xl transition-all duration-300 ${message.isUser ? 'bg-primary text-primary-foreground ml-12' : 'bg-muted text-muted-foreground'}`}>
-                    <p className="text-sm leading-relaxed">{message.text}</p>
+                    <div className="text-sm leading-relaxed prose prose-sm max-w-none dark:prose-invert prose-headings:text-inherit prose-p:text-inherit prose-strong:text-inherit prose-ul:text-inherit prose-li:text-inherit">
+                      <ReactMarkdown>{message.text}</ReactMarkdown>
+                    </div>
                   </div>
                   
                   {message.isUser && <Avatar className="w-8 h-8 border-2 border-primary/20">
