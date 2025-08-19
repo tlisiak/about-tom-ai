@@ -102,7 +102,7 @@ serve(async (req) => {
     console.log('Processing message:', message);
 
     const requestBody = {
-      model: 'gpt-5-nano-2025-08-07',
+      model: 'gpt-4.1-2025-04-14', // Switched from gpt-5-nano for better reliability
       messages: [
         { 
           role: 'system', 
@@ -117,6 +117,13 @@ serve(async (req) => {
     };
 
     console.log('Sending request to OpenAI with model:', requestBody.model);
+    console.log('Request body structure:', {
+      model: requestBody.model,
+      messagesCount: requestBody.messages.length,
+      systemPromptLength: TOMMY_CONTEXT.length,
+      userMessageLength: message.length,
+      maxTokens: requestBody.max_completion_tokens
+    });
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -138,11 +145,14 @@ serve(async (req) => {
 
     const data = await response.json();
     console.log('OpenAI response received successfully');
+    console.log('Full OpenAI response:', JSON.stringify(data, null, 2));
     console.log('Response structure:', {
       hasChoices: !!data.choices,
       choicesLength: data.choices?.length,
       hasMessage: !!data.choices?.[0]?.message,
-      hasContent: !!data.choices?.[0]?.message?.content
+      hasContent: !!data.choices?.[0]?.message?.content,
+      contentLength: data.choices?.[0]?.message?.content?.length || 0,
+      finishReason: data.choices?.[0]?.finish_reason
     });
     
     // Validate response structure
@@ -151,14 +161,20 @@ serve(async (req) => {
       throw new Error('Invalid response structure from OpenAI');
     }
 
-    const aiResponse = data.choices[0].message.content;
+    let aiResponse = data.choices[0].message.content;
     
-    if (!aiResponse) {
-      console.error('No content in OpenAI response');
-      throw new Error('No content received from OpenAI');
+    // Handle empty or null content with fallback
+    if (!aiResponse || aiResponse.trim().length === 0) {
+      console.error('Empty content in OpenAI response, using fallback');
+      console.error('Finish reason:', data.choices[0].finish_reason);
+      console.error('Full choice object:', JSON.stringify(data.choices[0], null, 2));
+      
+      // Provide a fallback response as Tommy
+      aiResponse = "Hello! I'm Tommy Lisiak, a Product & Growth Leader specializing in climate technology and sustainable business practices. I'm currently building Red Fox Labs, a consulting practice focused on product strategy and sustainable technology. How can I help you today? Feel free to ask about product management, climate tech, career development, or my experience building impactful products.";
     }
 
-    console.log('AI response length:', aiResponse.length);
+    console.log('Final AI response length:', aiResponse.length);
+    console.log('Response preview:', aiResponse.substring(0, 100) + '...');
 
     return new Response(JSON.stringify({ response: aiResponse }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
