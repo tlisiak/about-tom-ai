@@ -66,7 +66,25 @@ const HeroSection = () => {
         </div>
 
         {/* Scroll indicator */}
-        
+        <div className="flex flex-col items-center space-y-2 animate-in slide-in-from-bottom-10 duration-700 delay-600">
+          <p className="text-sm text-muted-foreground">Got questions? Let's chat!</p>
+          <div className="animate-bounce">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent p-2 shadow-glow hover:shadow-xl transition-all duration-300 cursor-pointer"
+                 onClick={() => {
+                   const chatSection = document.querySelector('section:nth-child(2)');
+                   chatSection?.scrollIntoView({ behavior: 'smooth' });
+                 }}>
+              <svg 
+                className="w-4 h-4 text-white" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
     </section>;
 };
