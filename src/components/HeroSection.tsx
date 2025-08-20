@@ -65,8 +65,8 @@ const HeroSection = () => {
           </Button>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="flex flex-col items-center space-y-2 animate-in slide-in-from-bottom-10 duration-700 delay-600">
+        {/* Scroll indicator - centered between CTA and next section */}
+        <div className="flex flex-col items-center space-y-2 mt-16 mb-12 animate-in slide-in-from-bottom-10 duration-700 delay-600">
           <p className="text-sm text-muted-foreground">Got questions? Let's chat!</p>
           <div className="animate-bounce">
             <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent p-2 shadow-glow hover:shadow-xl transition-all duration-300 cursor-pointer"
