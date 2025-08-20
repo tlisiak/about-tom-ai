@@ -53,15 +53,12 @@ const HeroSection = () => {
             variant="outline" 
             size="lg" 
             className="border-red-500/40 text-red-600 hover:border-red-500 hover:bg-red-500/10 hover:text-red-700 transition-all duration-300 hover:scale-105"
-            onClick={() => {
-              toast({
-                title: "Coming soon!",
-                description: "Red Fox Labs website is under development.",
-              });
-            }}
+            asChild
           >
-            <Zap className="w-5 h-5 mr-2" />
-            Red Fox Labs
+            <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer">
+              <Zap className="w-5 h-5 mr-2" />
+              Red Fox Labs
+            </a>
           </Button>
         </div>
 
