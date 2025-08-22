@@ -88,13 +88,13 @@ const ChatBot = () => {
       handleSendMessage();
     }
   };
-  return <section className="py-12 px-6 bg-gradient-to-b from-background to-accent/5">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+  return <div className="w-full py-12 px-6 bg-gradient-to-b from-background to-accent/5">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Ask Me Anything
           </h2>
-          <p className="text-muted-foreground text-lg">Have questions about my experience, projects, or interests? Chat with me!</p>
+          <p className="text-muted-foreground">Have questions? Let's chat!</p>
         </div>
 
         <Card className="bg-gradient-to-br from-card to-card/50 border-primary/20 shadow-card">
@@ -149,6 +149,6 @@ const ChatBot = () => {
           </CardContent>
         </Card>
       </div>
-    </section>;
+    </div>;
 };
 export default ChatBot;
