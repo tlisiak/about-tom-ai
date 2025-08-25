@@ -88,9 +88,9 @@ const ChatBot = () => {
       handleSendMessage();
     }
   };
-  return <div className="w-full py-12 px-6 bg-gradient-to-b from-background to-accent/5">
+  return <div className="w-full py-6 px-4 bg-accent/20 h-full flex flex-col justify-center">
       <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <h2 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Ask Me Anything
           </h2>
