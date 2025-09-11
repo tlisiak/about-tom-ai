@@ -16,7 +16,7 @@ interface Message {
 const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([{
     id: 1,
-    text: "Hey there! I'm Tommy. Feel free to ask me anything about my background, experience, or interests. What would you like to know?",
+    text: "Feel free to ask me anything about my background, experience, or interests. What would you like to know?",
     isUser: false,
     timestamp: new Date()
   }]);
