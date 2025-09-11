@@ -27,9 +27,8 @@ const HeroSection = () => {
           
           {/* Bio */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200">
-            As a product leader and climate tech advocate, I blend innovation with sustainability to drive impactful change. 
-            Currently Head of Product at <span className="text-primary font-semibold">Scout</span>, building AI-powered tools 
-            to help socially responsible businesses win non-dilutive funding.
+            I'm Tommy, a product leader focused on the intersection of AI and impact. At <span className="text-primary font-semibold">Scout</span>, 
+            I lead product to help mission-driven companies win non-dilutive funding. Thanks for stopping by my little corner of the web.
           </p>
         </div>
 
