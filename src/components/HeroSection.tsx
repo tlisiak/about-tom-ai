@@ -29,7 +29,7 @@ const HeroSection = () => {
           
           {/* Bio */}
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-            I'm Tommy, a product leader focused on the intersection of AI and impact. At <span className="text-white font-semibold drop-shadow">Scout</span>, 
+            I'm Tommy, a product leader focused on the intersection of AI and impact. At <a href="http://scoutclimate.com/" target="_blank" rel="noopener noreferrer" className="text-white font-semibold drop-shadow hover:text-white/80 transition-colors underline decoration-white/50 hover:decoration-white/80">Scout</a>, 
             I lead product to help mission-driven companies win non-dilutive funding. Thanks for stopping by my little corner of the web.
           </p>
         </div>
