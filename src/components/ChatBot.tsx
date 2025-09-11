@@ -30,16 +30,18 @@ const ChatBot = () => {
   const getAIResponse = async (question: string): Promise<string> => {
     try {
       console.log('Sending message to AI:', question);
-      
-      const { data, error } = await supabase.functions.invoke('chat-with-tommy', {
-        body: { message: question }
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('chat-with-tommy', {
+        body: {
+          message: question
+        }
       });
-
       if (error) {
         console.error('Supabase function error:', error);
         throw error;
       }
-
       console.log('Received AI response:', data);
       return data.response || "I'm sorry, I couldn't generate a response. Please try again.";
     } catch (error) {
@@ -47,26 +49,23 @@ const ChatBot = () => {
       toast({
         title: "Connection Error",
         description: "Unable to connect to the AI assistant. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return "I'm sorry, I'm having trouble connecting right now. Please try again in a moment.";
     }
   };
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
-    
     const userMessage: Message = {
       id: messages.length + 1,
       text: inputValue.trim(),
       isUser: true,
       timestamp: new Date()
     };
-    
     setMessages(prev => [...prev, userMessage]);
     const currentMessage = inputValue.trim();
     setInputValue("");
     setIsTyping(true);
-
     try {
       const response = await getAIResponse(currentMessage);
       const aiMessage: Message = {
@@ -94,7 +93,7 @@ const ChatBot = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Ask Me Anything
           </h2>
-          <p className="text-muted-foreground text-lg">Have questions about my experience, projects, or interests? Chat with me!</p>
+          <p className="text-muted-foreground text-lg">Have questions about my experience, projects, or interests?</p>
         </div>
 
         <Card className="bg-gradient-to-br from-card to-card/50 border-primary/20 shadow-card">
