@@ -1,11 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Linkedin, Mail, Zap } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+
 const HeroSection = () => {
-  const {
-    toast
-  } = useToast();
   return <section 
       className="min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative"
       style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }}
