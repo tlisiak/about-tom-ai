@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Linkedin, Mail, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
 const HeroSection = () => {
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   return <section className="min-h-screen flex items-center justify-center p-6 pb-8 bg-gradient-to-br from-background via-background to-accent/10">
       <div className="max-w-4xl mx-auto text-center space-y-8">
         {/* Profile Avatar */}
@@ -21,9 +21,7 @@ const HeroSection = () => {
 
         {/* Hero Title */}
         <div className="space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-in slide-in-from-bottom-4 duration-700">
-            Hi, I'm Tommy
-          </h1>
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-in slide-in-from-bottom-4 duration-700">Hi there 👋</h1>
           
           {/* Bio */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200">
@@ -48,12 +46,7 @@ const HeroSection = () => {
             </a>
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-red-500/40 text-red-600 hover:border-red-500 hover:bg-red-500/10 hover:text-red-700 transition-all duration-300 hover:scale-105"
-            asChild
-          >
+          <Button variant="outline" size="lg" className="border-red-500/40 text-red-600 hover:border-red-500 hover:bg-red-500/10 hover:text-red-700 transition-all duration-300 hover:scale-105" asChild>
             <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer">
               <Zap className="w-5 h-5 mr-2" />
               Red Fox Labs
@@ -65,17 +58,13 @@ const HeroSection = () => {
         <div className="flex flex-col items-center mt-16 mb-12 animate-in slide-in-from-bottom-10 duration-700 delay-600">
           <p className="text-sm text-muted-foreground">Got questions? Let's chat!</p>
           <div className="animate-bounce mt-4">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent p-2 shadow-glow hover:shadow-xl transition-all duration-300 cursor-pointer"
-                 onClick={() => {
-                   const chatSection = document.querySelector('section:nth-child(2)');
-                   chatSection?.scrollIntoView({ behavior: 'smooth' });
-                 }}>
-              <svg 
-                className="w-4 h-4 text-white" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent p-2 shadow-glow hover:shadow-xl transition-all duration-300 cursor-pointer" onClick={() => {
+            const chatSection = document.querySelector('section:nth-child(2)');
+            chatSection?.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }}>
+              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </div>
