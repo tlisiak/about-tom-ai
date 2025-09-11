@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Linkedin, Mail, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import sfBackground from "@/assets/sf-background.jpg";
 const HeroSection = () => {
   const {
     toast
   } = useToast();
   return <section 
       className="min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative"
-      style={{ backgroundImage: `url(${sfBackground})` }}
+      style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }}
     >
       {/* Glass card container */}
       <div className="max-w-4xl mx-auto text-center space-y-8 backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
@@ -59,12 +58,11 @@ const HeroSection = () => {
           </Button>
         </div>
 
-        {/* Scroll indicator - centered between CTA and next section */}
-        <div className="flex flex-col items-center mt-16 mb-12 animate-in slide-in-from-bottom-10 duration-700 delay-600">
-          
-          <div className="animate-bounce mt-4">
-            
-          </div>
+        {/* Footer text */}
+        <div className="mt-12 pt-6 border-t border-white/20 animate-in slide-in-from-bottom-10 duration-700 delay-600">
+          <p className="text-sm text-white/80">
+            Built by <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-white/90 transition-colors">Red Fox Labs</a>
+          </p>
         </div>
       </div>
     </section>;
