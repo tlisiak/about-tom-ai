@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Linkedin, Github, Mail, Zap } from "lucide-react";
+import { Linkedin, Github, Mail, Zap, Trophy } from "lucide-react";
 
 const HeroSection = () => {
   return <section 
@@ -60,6 +60,19 @@ const HeroSection = () => {
               Red Fox Labs
             </a>
           </Button>
+        </div>
+
+        {/* Fun Things Section */}
+        <div className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
+          <h2 className="text-2xl font-semibold text-white/90 drop-shadow">Fun Things</h2>
+          <div className="flex justify-center">
+            <Button variant="glass" size="lg" asChild>
+              <a href="https://goalpredict.app/" target="_blank" rel="noopener noreferrer">
+                <Trophy className="w-5 h-5 mr-2" />
+                Goal Predict
+              </a>
+            </Button>
+          </div>
         </div>
 
         {/* Footer text */}
