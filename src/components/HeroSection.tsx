@@ -33,28 +33,28 @@ const HeroSection = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap justify-center gap-4 animate-in slide-in-from-bottom-8 duration-700 delay-400">
-          <Button variant="default" size="lg" className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 hover:scale-105" asChild>
+          <Button variant="glass" size="lg" asChild>
             <a href="https://www.linkedin.com/in/tommylisiak/" target="_blank" rel="noopener noreferrer">
               <Linkedin className="w-5 h-5 mr-2" />
               LinkedIn
             </a>
           </Button>
           
-          <Button variant="default" size="lg" className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 hover:scale-105" asChild>
+          <Button variant="glass" size="lg" asChild>
             <a href="https://github.com/tlisiak" target="_blank" rel="noopener noreferrer">
               <Github className="w-5 h-5 mr-2" />
               GitHub
             </a>
           </Button>
           
-          <Button variant="secondary" size="lg" className="bg-white/15 text-white border-white/25 hover:bg-white/25 backdrop-blur-sm transition-all duration-300 hover:scale-105" asChild>
+          <Button variant="glass" size="lg" asChild>
             <a href="mailto:tommylisiak@gmail.com">
               <Mail className="w-5 h-5 mr-2" />
               Email
             </a>
           </Button>
           
-          <Button variant="outline" size="lg" className="border-orange-300/60 text-orange-100 hover:border-orange-200 hover:bg-orange-500/20 hover:text-orange-50 backdrop-blur-sm transition-all duration-300 hover:scale-105" asChild>
+          <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
             <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer">
               <Zap className="w-5 h-5 mr-2" />
               Red Fox Labs
