@@ -26,8 +26,7 @@ const HeroSection = () => {
           
           {/* Bio */}
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-            I'm Tommy, a product leader focused on the intersection of AI and impact. At <a href="https://scoutclimate.com/" target="_blank" rel="noopener noreferrer" className="text-white font-semibold drop-shadow hover:text-white/80 transition-colors">Scout</a>, 
-            I lead product to help mission-driven companies win non-dilutive funding. Thanks for stopping by my little corner of the web.
+            I'm Tommy, a product leader focused on the intersection of AI and impact. At Scout, I lead product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way. Outside of work, you'll usually find me playing or watching soccer, cooking something gourmet, hiking a new trail, tending to my plants, catching up with friends, reading, or hanging out with my partner and dog, Paco. Thanks for stopping by my little corner of the web.
           </p>
         </div>
 
