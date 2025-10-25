@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Linkedin, Github, Mail, Zap, Trophy, FileText } from "lucide-react";
+import { Linkedin, Github, Mail, Cat, Trophy, FileText } from "lucide-react";
 
 const HeroSection = () => {
   return <section 
@@ -63,7 +63,7 @@ const HeroSection = () => {
           
           <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
             <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer">
-              <Zap className="w-5 h-5 mr-2" />
+              <Cat className="w-5 h-5 mr-2" />
               Red Fox Labs
             </a>
           </Button>
