@@ -62,19 +62,19 @@ const HeroSection = () => {
               Email
             </a>
           </Button>
-          
-          <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
-            <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer">
-              <Cat className="w-5 h-5 mr-2" />
-              Red Fox Labs
-            </a>
-          </Button>
         </div>
 
         {/* Fun Things Section */}
         <div className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
           <h2 className="text-2xl font-semibold text-white/90 drop-shadow">Fun Things</h2>
-          <div className="flex justify-center">
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
+              <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer">
+                <Cat className="w-5 h-5 mr-2" />
+                Red Fox Labs
+              </a>
+            </Button>
+            
             <Button variant="glass" size="lg" asChild>
               <a href="https://goalpredict.app/" target="_blank" rel="noopener noreferrer">
                 <Trophy className="w-5 h-5 mr-2" />
