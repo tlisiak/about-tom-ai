@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Linkedin, Github, Mail, Zap, Trophy } from "lucide-react";
+import { Linkedin, Github, Mail, Zap, Trophy, FileText } from "lucide-react";
 
 const HeroSection = () => {
   return <section 
@@ -37,6 +37,13 @@ const HeroSection = () => {
             <a href="https://www.linkedin.com/in/tommylisiak/" target="_blank" rel="noopener noreferrer">
               <Linkedin className="w-5 h-5 mr-2" />
               LinkedIn
+            </a>
+          </Button>
+          
+          <Button variant="glass" size="lg" asChild>
+            <a href="https://drive.google.com/file/d/11D2oAKYEuAqIllN4pRRTpbzbPQ7z7DR8/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+              <FileText className="w-5 h-5 mr-2" />
+              Resume
             </a>
           </Button>
           
