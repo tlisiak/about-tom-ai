@@ -25,15 +25,15 @@ const HeroSection = () => {
 
         {/* Bio Section */}
         <article className="space-y-4">
-          <div className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700">
-            Hi there 👋
-          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700">
             Tommy Lisiak
           </h1>
           <p className="text-2xl md:text-3xl font-semibold text-white/95 drop-shadow">
             Product & Growth Leader
           </p>
+          <div className="text-xl md:text-2xl text-white/90 drop-shadow animate-in slide-in-from-bottom-4 duration-700">
+            Hi there 👋
+          </div>
           
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
             I'm Tommy, a product leader focused on the intersection of AI and impact. At Scout, I lead product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
