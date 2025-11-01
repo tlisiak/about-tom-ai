@@ -24,19 +24,18 @@ const HeroSection = () => {
         </header>
 
         {/* Bio Section */}
-        <article className="space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700">
-            Tommy Lisiak
-          </h1>
-          <p className="text-2xl md:text-3xl font-semibold text-white/95 drop-shadow">
-            Product & Growth Leader
-          </p>
-          <div className="text-xl md:text-2xl text-white/90 drop-shadow animate-in slide-in-from-bottom-4 duration-700">
-            Hi there 👋
+        <article className="space-y-6">
+          <div className="space-y-2 animate-in slide-in-from-bottom-4 duration-700">
+            <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
+              Tommy Lisiak
+            </h1>
+            <p className="text-xl md:text-2xl font-light text-white/80 drop-shadow">
+              Product & Growth Leader
+            </p>
           </div>
           
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-            I'm Tommy, a product leader focused on the intersection of AI and impact. At Scout, I lead product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
+            Hi there 👋 I'm Tommy, a product leader focused on the intersection of AI and impact. At Scout, I lead product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
           </p>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
             Outside of work, you'll usually find me playing or watching soccer, cooking something gourmet, hiking a new trail, tending to my plants, catching up with friends, reading, or hanging out with my partner and dog, Paco. Thanks for stopping by my little corner of the web!
