@@ -25,6 +25,9 @@ const HeroSection = () => {
 
         {/* Bio Section */}
         <article className="space-y-4">
+          <div className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700">
+            Hi there 👋
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg animate-in slide-in-from-bottom-4 duration-700">
             Tommy Lisiak
           </h1>
