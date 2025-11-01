@@ -8,7 +8,7 @@ const HeroSection = () => {
       style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }}
     >
       {/* Glass card container with dark overlay */}
-      <div className="relative max-w-4xl mx-auto text-center space-y-8 backdrop-blur-md bg-black/40 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
+      <div className="relative max-w-4xl mx-auto text-center space-y-8 backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
         {/* Profile Avatar */}
         <div className="relative">
           <Avatar className="w-32 h-32 mx-auto border-4 border-white/30 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105">
