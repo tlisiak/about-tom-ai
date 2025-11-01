@@ -1,0 +1,24 @@
+{
+  "name": "Tommy Lisiak - Product & Growth Leader",
+  "short_name": "Tommy Lisiak",
+  "description": "Product leader and climate tech advocate blending innovation with sustainability",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/lovable-uploads/00d98ff0-cea1-495b-a987-33713991e19b.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/00d98ff0-cea1-495b-a987-33713991e19b.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
