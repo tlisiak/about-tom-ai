@@ -58,7 +58,7 @@ const HeroSection = () => {
           
           <Button variant="glass" size="lg" asChild>
             <a 
-              href="https://docs.google.com/document/d/1wa_sGviGFlJYp8tASwk8iEf_YQ-vQggc/edit?usp=drive_link&ouid=111489359474358050574&rtpof=true&sd=true" 
+              href="https://drive.google.com/file/d/1CRRtz-5OmoVZtvo1UJQX7Q0PDZ5ecZJD/view?usp=sharing" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="Download Tommy Lisiak's resume"
