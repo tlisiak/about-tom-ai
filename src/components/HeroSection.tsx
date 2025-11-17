@@ -14,7 +14,7 @@ const HeroSection = () => {
           <Avatar className="w-32 h-32 mx-auto border-4 border-white/30 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105">
             <AvatarImage 
               src="/lovable-uploads/00d98ff0-cea1-495b-a987-33713991e19b.png" 
-              alt="Tommy Lisiak - Product Leader and Climate Tech Advocate" 
+              alt="Tommy Lisiak - Product & Growth Leader | Tech & Sustainability Advocate" 
               loading="eager"
             />
             <AvatarFallback className="text-2xl font-bold bg-white/20 backdrop-blur-sm text-white border border-white/30">
@@ -35,7 +35,7 @@ const HeroSection = () => {
           </div>
           
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-            Hi there 👋 I'm Tommy, based in the San Francisco Bay Area, a product leader focused on the intersection of AI and impact. At Scout, I lead product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
+            Hi there 👋 I'm Tommy, based in the San Francisco Bay Area, a product leader focused on the intersection of AI and impact. Most recently at Scout, I led product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
           </p>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
             Outside of work, you'll usually find me playing or watching soccer, cooking something gourmet, hiking a new trail, tending to my plants, catching up with friends, reading, or hanging out with my partner and dog, Paco. Thanks for stopping by my little corner of the web!
