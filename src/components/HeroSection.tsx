@@ -72,15 +72,6 @@ const HeroSection = () => {
                   Building products for people and progress
                 </p>
               </div>
-
-              {/* Chat CTA - Prominent placement */}
-              <div className="animate-in slide-in-from-bottom-5 duration-700 delay-150">
-                <Button ref={ctaButtonRef} variant="chat" size="lg" onClick={openChat} className="text-base px-6 py-6 rounded-2xl">
-                  <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
-                  <span className="hidden sm:inline">Chat with Me</span>
-                  <span className="sm:hidden">Chat</span>
-                </Button>
-              </div>
               
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
                 Hi there 👋 I'm Tommy, based in the San Francisco Bay Area, a product leader focused on the intersection of AI and impact. Most recently at Scout, I led product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
@@ -125,6 +116,12 @@ const HeroSection = () => {
             <aside className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
               <h2 className="text-2xl font-semibold text-white/90 drop-shadow">Fun Projects</h2>
               <nav className="flex flex-wrap justify-center gap-4" aria-label="Personal projects">
+                <Button ref={ctaButtonRef} variant="chat" size="lg" onClick={openChat} className="text-base px-6 py-6 rounded-2xl">
+                  <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
+                  <span className="hidden sm:inline">Chat with Me</span>
+                  <span className="sm:hidden">Chat</span>
+                </Button>
+                
                 <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
                   <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer" aria-label="Visit Red Fox Labs website">
                     <Cat className="w-5 h-5 mr-2" aria-hidden="true" />
