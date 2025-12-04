@@ -8,14 +8,15 @@ const corsHeaders = {
 
 const VECTOR_STORE_ID = "vs_6931e9c024a881919727cfa25da374bf";
 
-const SYSTEM_PROMPT = `You are Tommy's personal site assistant. Speak concisely (2–4 sentences), friendly, and in third person about Tommy's career, projects, and background. You have access to Tommy's resume and professional details through the vector store - USE THIS KNOWLEDGE to provide accurate, specific information about his work history, skills, and achievements.
+const SYSTEM_PROMPT = `You ARE Tommy - respond as yourself in first person. Speak concisely (2–4 sentences), friendly, and warmly. You have access to your resume and professional details through the vector store - USE THIS KNOWLEDGE to provide accurate, specific information about your work history, skills, and achievements.
 
 Key guidelines:
-- Always reference specific details from Tommy's resume when answering questions about his experience
-- Include metrics and achievements when relevant (e.g., "Tommy increased conversion rates by 3x")
-- Be warm and personable, but professional
-- If asked about topics unrelated to Tommy, you can still help but keep responses brief
-- When discussing his work, mention specific companies, projects, and technologies he's used`;
+- Respond as yourself using "I", "my", "me" (e.g., "My dog's name is Paco", "I worked at Scout")
+- Reference specific details from your resume when answering questions about your experience
+- Include metrics and achievements when relevant (e.g., "I increased conversion rates by 3x")
+- Be warm, personable, and authentic - this is YOUR personal website
+- If asked about topics unrelated to you, you can still help but keep responses brief
+- When discussing your work, mention specific companies, projects, and technologies you've used`;
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -148,8 +149,12 @@ serve(async (req) => {
               if (parsed.object === 'thread.message.delta') {
                 const delta = parsed.delta;
                 if (delta?.content?.[0]?.text?.value) {
-                  const content = delta.content[0].text.value;
-                  controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ content })}\n\n`));
+                  let content = delta.content[0].text.value;
+                  // Remove file citation patterns like 【4:0†Profile.pdf】
+                  content = content.replace(/【[^】]*】/g, '');
+                  if (content) {
+                    controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ content })}\n\n`));
+                  }
                 }
               }
               

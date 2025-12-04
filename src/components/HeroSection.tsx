@@ -4,7 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Linkedin, Github, Mail, Cat, Trophy, FileText, MessageCircle } from "lucide-react";
 import ChatWidget from "./ChatWidget";
+
 const CHAT_ENDPOINT = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
+
 const HeroSection = () => {
   const [chatMode, setChatMode] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -18,44 +20,69 @@ const HeroSection = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
   const openChat = () => {
     setChatMode(true);
-    // Scroll hero into view if needed
     heroRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
   };
+
   const closeChat = () => {
     setChatMode(false);
-    // Return focus to CTA button
     setTimeout(() => ctaButtonRef.current?.focus(), 100);
   };
 
   // Mobile: use Sheet for full-screen chat
   if (isMobile && chatMode) {
-    return <>
-        <section ref={heroRef} className="min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative" style={{
-        backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)'
-      }} aria-label="Hero section with profile information" />
+    return (
+      <>
+        <section 
+          ref={heroRef} 
+          className="min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative" 
+          style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }} 
+          aria-label="Hero section with profile information" 
+        />
         <Sheet open={chatMode} onOpenChange={open => !open && closeChat()}>
           <SheetContent side="bottom" className="h-[90vh] p-0 bg-black/80 backdrop-blur-xl border-t border-white/20 rounded-t-3xl">
-            <ChatWidget endpoint={CHAT_ENDPOINT} title="Chat with Me" welcome="Hi! 👋 Ask me about Tommy's work, projects, or resume. I have access to his full background and can give you specific details." speakReplies={true} onClose={closeChat} />
+            <ChatWidget 
+              endpoint={CHAT_ENDPOINT} 
+              title="Chat with Me" 
+              welcome="Hi! 👋 Ask me anything about my work, projects, or background. I'm happy to share specific details about my experience!" 
+              onClose={closeChat} 
+            />
           </SheetContent>
         </Sheet>
-      </>;
+      </>
+    );
   }
-  return <section ref={heroRef} className="min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative" style={{
-    backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)'
-  }} aria-label="Hero section with profile information">
+
+  return (
+    <section 
+      ref={heroRef} 
+      className="min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative" 
+      style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }} 
+      aria-label="Hero section with profile information"
+    >
       <main className="relative max-w-4xl mx-auto text-center backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
-        {chatMode ? (/* Chat Mode */
-      <ChatWidget endpoint={CHAT_ENDPOINT} title="Chat with Me" welcome="Hi! 👋 Ask me about Tommy's work, projects, or resume. I have access to his full background and can give you specific details." speakReplies={true} onClose={closeChat} />) : (/* Default Hero Content */
-      <>
+        {chatMode ? (
+          <ChatWidget 
+            endpoint={CHAT_ENDPOINT} 
+            title="Chat with Me" 
+            welcome="Hi! 👋 Ask me anything about my work, projects, or background. I'm happy to share specific details about my experience!" 
+            onClose={closeChat} 
+          />
+        ) : (
+          <>
             {/* Profile Avatar */}
             <header className="relative">
               <Avatar className="w-32 h-32 mx-auto border-4 border-white/30 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105">
-                <AvatarImage src="/lovable-uploads/00d98ff0-cea1-495b-a987-33713991e19b.png" alt="Tommy Lisiak - Product & Growth Leader | Tech & Sustainability Advocate" loading="eager" />
+                <AvatarImage 
+                  src="/lovable-uploads/00d98ff0-cea1-495b-a987-33713991e19b.png" 
+                  alt="Tommy Lisiak - Product & Growth Leader | Tech & Sustainability Advocate" 
+                  loading="eager" 
+                />
                 <AvatarFallback className="text-2xl font-bold bg-white/20 backdrop-blur-sm text-white border border-white/30">
                   TL
                 </AvatarFallback>
@@ -74,13 +101,12 @@ const HeroSection = () => {
               </div>
               
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-                ​Hi there 👋 I’m Tommy, a San Francisco Bay Area based product and startup leader passionate about the intersection of AI, sustainability and impact. I love building solutions that integrate with the human experience to make the world a better place. As Head of Product @ Scout, I lead product strategy and development for an AI-powered grant platform that’s helped 1,000+ users secure over $10M+in funding. 
+                ​Hi there 👋 I'm Tommy, a San Francisco Bay Area based product and startup leader passionate about the intersection of AI, sustainability and impact. I love building solutions that integrate with the human experience to make the world a better place. As Head of Product @ Scout, I lead product strategy and development for an AI-powered grant platform that's helped 1,000+ users secure over $10M+in funding. 
 
-Over the past 8 years, I’ve built scalable systems and empowered teams that turn complex problems into meaningful, measurable outcomes across energy, fintech, climate tech, SaaS, and media. 
+Over the past 8 years, I've built scalable systems and empowered teams that turn complex problems into meaningful, measurable outcomes across energy, fintech, climate tech, SaaS, and media. 
 
-Outside of work, I’m usually playing or watching soccer, experimenting in the kitchen, exploring new trails, or hanging out with my fiancée and our dog, Paco.
+Outside of work, I'm usually playing or watching soccer, experimenting in the kitchen, exploring new trails, or hanging out with my fiancée and our dog, Paco.
               </p>
-              
             </article>
 
             {/* Action Buttons */}
@@ -118,7 +144,13 @@ Outside of work, I’m usually playing or watching soccer, experimenting in the 
             <aside className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
               <h2 className="text-2xl font-semibold text-white/90 drop-shadow">Fun Projects</h2>
               <nav className="flex flex-wrap justify-center gap-4" aria-label="Personal projects">
-                <Button ref={ctaButtonRef} variant="glass" size="lg" onClick={openChat} className="border-green-300/60 hover:border-green-200 hover:bg-green-500/20 shadow-[0_0_20px_hsl(150_70%_55%/0.5),0_0_35px_hsl(150_70%_55%/0.3)]">
+                <Button 
+                  ref={ctaButtonRef} 
+                  variant="glass" 
+                  size="lg" 
+                  onClick={openChat} 
+                  className="border-green-300/60 hover:border-green-200 hover:bg-green-500/20 shadow-[0_0_20px_hsl(150_70%_55%/0.5),0_0_35px_hsl(150_70%_55%/0.3)]"
+                >
                   <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
                   Chat with Me
                 </Button>
@@ -142,13 +174,23 @@ Outside of work, I’m usually playing or watching soccer, experimenting in the 
             {/* Footer text */}
             <footer className="mt-12 pt-6 border-t border-white/20 animate-in slide-in-from-bottom-10 duration-700 delay-600">
               <p className="text-sm text-white/80">
-                Built by <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-white/90 transition-colors" aria-label="Visit Red Fox Labs website">
+                Built by{" "}
+                <a 
+                  href="https://redfoxlabs.co" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white font-medium hover:text-white/90 transition-colors" 
+                  aria-label="Visit Red Fox Labs website"
+                >
                   Red Fox Labs
                 </a>
               </p>
             </footer>
-          </>)}
+          </>
+        )}
       </main>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;

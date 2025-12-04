@@ -2,14 +2,12 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, ArrowLeft, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useChat } from "@/hooks/useChat";
-import { useSpeechSynthesis } from "@/hooks/useSpeechSynthesis";
 import ChatMessage from "./ChatMessage";
 
 interface ChatWidgetProps {
   endpoint: string;
   title: string;
   welcome: string;
-  speakReplies?: boolean;
   onClose: () => void;
 }
 
@@ -17,7 +15,6 @@ const ChatWidget = ({
   endpoint, 
   title, 
   welcome, 
-  speakReplies = true,
   onClose 
 }: ChatWidgetProps) => {
   const [input, setInput] = useState("");
@@ -29,12 +26,6 @@ const ChatWidget = ({
     endpoint,
     welcomeMessage: welcome,
   });
-
-  const { speak, stop, isSpeaking, isSupported: ttsSupported } = useSpeechSynthesis({
-    enabled: speakReplies,
-  });
-
-  const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -57,39 +48,17 @@ const ChatWidget = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  // Speak latest assistant message if enabled
-  useEffect(() => {
-    if (!speakReplies || !ttsSupported || isLoading) return;
-    
-    const latestMessage = messages[messages.length - 1];
-    if (latestMessage?.role === 'assistant' && latestMessage.id !== 'welcome') {
-      // Only auto-speak if content just finished loading
-      const prevMessage = messages[messages.length - 2];
-      if (prevMessage?.role === 'user') {
-        speak(latestMessage.content);
-        setSpeakingMessageId(latestMessage.id);
-      }
-    }
-  }, [messages, isLoading, speakReplies, ttsSupported, speak]);
-
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim() && !isLoading) {
-      stop(); // Stop any ongoing speech
       sendMessage(input);
       setInput("");
     }
-  }, [input, isLoading, sendMessage, stop]);
+  }, [input, isLoading, sendMessage]);
 
-  const handleSpeak = useCallback((messageId: string, content: string) => {
-    speak(content);
-    setSpeakingMessageId(messageId);
-  }, [speak]);
-
-  const handleStopSpeaking = useCallback(() => {
-    stop();
-    setSpeakingMessageId(null);
-  }, [stop]);
+  // Check if we should show thinking indicator
+  const lastMessage = messages[messages.length - 1];
+  const showThinking = isLoading && (!lastMessage || lastMessage.role === 'user' || lastMessage.content === '');
 
   return (
     <div 
@@ -130,25 +99,20 @@ const ChatWidget = ({
         aria-live="polite"
         aria-atomic="false"
       >
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <ChatMessage
             key={message.id}
             role={message.role}
             content={message.content}
-            isLatest={index === messages.length - 1}
-            canSpeak={ttsSupported && message.role === 'assistant'}
-            isSpeaking={isSpeaking && speakingMessageId === message.id}
-            onSpeak={() => handleSpeak(message.id, message.content)}
-            onStopSpeaking={handleStopSpeaking}
           />
         ))}
         
-        {/* Typing indicator */}
-        {isLoading && messages[messages.length - 1]?.content === '' && (
+        {/* Thinking indicator */}
+        {showThinking && (
           <div className="flex justify-start mb-3">
             <div className="bg-white/15 text-white border border-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 mr-8">
-              <div className="flex items-center gap-1.5">
-                <span className="text-sm text-white/70">Tommy's AI is thinking</span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-white/80">Tommy's thinking really hard</span>
                 <span className="flex gap-1">
                   <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                   <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -179,7 +143,7 @@ const ChatWidget = ({
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about Tommy's work, projects, or resume..."
+            placeholder="Ask me anything about my work or background..."
             disabled={isLoading}
             className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 disabled:opacity-50 transition-all"
             aria-label="Type your message"
