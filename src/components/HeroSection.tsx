@@ -69,7 +69,7 @@ const HeroSection = () => {
                   Tommy Lisiak
                 </h1>
                 <p className="text-xl md:text-2xl font-light text-white/80 drop-shadow">
-                  Building Products for People and Progress
+                  Building products for people and progress
                 </p>
               </div>
 
