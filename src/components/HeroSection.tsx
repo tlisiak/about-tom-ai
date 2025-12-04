@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -12,6 +12,10 @@ const HeroSection = () => {
   const [isMobile, setIsMobile] = useState(false);
   const ctaButtonRef = useRef<HTMLButtonElement>(null);
   const heroRef = useRef<HTMLElement>(null);
+  
+  // Swipe gesture state
+  const touchStartY = useRef<number | null>(null);
+  const sheetContentRef = useRef<HTMLDivElement>(null);
 
   // Detect mobile
   useEffect(() => {
@@ -34,6 +38,36 @@ const HeroSection = () => {
     setTimeout(() => ctaButtonRef.current?.focus(), 100);
   };
 
+  // Swipe-down gesture handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const target = e.target as HTMLElement;
+    const scrollableContainer = target.closest('[data-chat-messages]');
+    
+    // Only track swipe if at top of scrollable area or touching the header
+    if (scrollableContainer && scrollableContainer.scrollTop > 0) {
+      touchStartY.current = null;
+      return;
+    }
+    touchStartY.current = e.touches[0].clientY;
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (touchStartY.current === null) return;
+    
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - touchStartY.current;
+    
+    // If swiping down more than 80px, close the sheet
+    if (diff > 80) {
+      touchStartY.current = null;
+      closeChat();
+    }
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    touchStartY.current = null;
+  }, []);
+
   // Mobile: use Sheet for full-screen chat
   if (isMobile && chatMode) {
     return (
@@ -45,7 +79,18 @@ const HeroSection = () => {
           aria-label="Hero section with profile information" 
         />
         <Sheet open={chatMode} onOpenChange={open => !open && closeChat()}>
-          <SheetContent side="bottom" className="h-[95dvh] max-h-[95dvh] p-0 bg-black/30 backdrop-blur-md border-t border-white/20 rounded-t-3xl">
+          <SheetContent 
+            ref={sheetContentRef}
+            side="bottom" 
+            className="h-[95dvh] max-h-[95dvh] p-0 bg-black/30 backdrop-blur-md border-t border-white/20 rounded-t-3xl"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Swipe indicator */}
+            <div className="flex justify-center pt-3 pb-1">
+              <div className="w-10 h-1 bg-white/40 rounded-full" />
+            </div>
             <ChatWidget 
               endpoint={CHAT_ENDPOINT} 
               title="Chat with Me" 
