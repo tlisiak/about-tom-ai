@@ -7,9 +7,12 @@ import ChatWidget from "./ChatWidget";
 
 const CHAT_ENDPOINT = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
 
+const SWIPE_THRESHOLD = 80;
+
 const HeroSection = () => {
   const [chatMode, setChatMode] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [pullProgress, setPullProgress] = useState(0);
   const ctaButtonRef = useRef<HTMLButtonElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   
@@ -35,6 +38,7 @@ const HeroSection = () => {
 
   const closeChat = () => {
     setChatMode(false);
+    setPullProgress(0);
     setTimeout(() => ctaButtonRef.current?.focus(), 100);
   };
 
@@ -57,8 +61,12 @@ const HeroSection = () => {
     const currentY = e.touches[0].clientY;
     const diff = currentY - touchStartY.current;
     
-    // If swiping down more than 80px, close the sheet
-    if (diff > 80) {
+    // Calculate progress (0 to 1)
+    const progress = Math.min(Math.max(diff / SWIPE_THRESHOLD, 0), 1);
+    setPullProgress(progress);
+    
+    // If swiping down past threshold, close the sheet
+    if (diff > SWIPE_THRESHOLD) {
       touchStartY.current = null;
       closeChat();
     }
@@ -66,10 +74,13 @@ const HeroSection = () => {
 
   const handleTouchEnd = useCallback(() => {
     touchStartY.current = null;
+    setPullProgress(0);
   }, []);
 
   // Mobile: use Sheet for full-screen chat
   if (isMobile && chatMode) {
+    const isReady = pullProgress >= 1;
+    
     return (
       <>
         <section 
@@ -87,9 +98,28 @@ const HeroSection = () => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Swipe indicator */}
-            <div className="flex justify-center pt-3 pb-1">
-              <div className="w-10 h-1 bg-white/40 rounded-full" />
+            {/* Pull indicator with progress */}
+            <div className="flex flex-col items-center pt-3 pb-1">
+              <div 
+                className="h-1 rounded-full transition-all duration-100"
+                style={{
+                  width: `${Math.max(40, 40 + pullProgress * 40)}px`,
+                  backgroundColor: isReady 
+                    ? 'rgb(74, 222, 128)' 
+                    : `rgba(255, 255, 255, ${0.4 + pullProgress * 0.4})`,
+                }}
+              />
+              {pullProgress > 0.1 && (
+                <span 
+                  className="text-xs mt-1 transition-opacity duration-150"
+                  style={{ 
+                    opacity: pullProgress,
+                    color: isReady ? 'rgb(74, 222, 128)' : 'rgba(255, 255, 255, 0.6)'
+                  }}
+                >
+                  {isReady ? 'Release to close' : 'Pull to close'}
+                </span>
+              )}
             </div>
             <ChatWidget 
               endpoint={CHAT_ENDPOINT} 
