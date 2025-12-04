@@ -105,6 +105,21 @@ const HeroSection = () => {
                   Product & Growth Leader
                 </p>
               </div>
+
+              {/* Chat CTA - Prominent placement */}
+              <div className="animate-in slide-in-from-bottom-5 duration-700 delay-150">
+                <Button 
+                  ref={ctaButtonRef}
+                  variant="chat" 
+                  size="lg" 
+                  onClick={openChat}
+                  className="text-base px-6 py-6 rounded-2xl"
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
+                  <span className="hidden sm:inline">Chat with Me</span>
+                  <span className="sm:hidden">Chat</span>
+                </Button>
+              </div>
               
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
                 Hi there 👋 I'm Tommy, based in the San Francisco Bay Area, a product leader focused on the intersection of AI and impact. Most recently at Scout, I led product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
@@ -113,21 +128,6 @@ const HeroSection = () => {
                 Outside of work, you'll usually find me playing or watching soccer, cooking something gourmet, hiking a new trail, tending to my plants, catching up with friends, reading, or hanging out with my partner and dog, Paco. Thanks for stopping by my little corner of the web!
               </p>
             </article>
-
-            {/* Chat CTA - Prominent placement */}
-            <div className="mt-8 animate-in slide-in-from-bottom-7 duration-700 delay-300">
-              <Button 
-                ref={ctaButtonRef}
-                variant="chat" 
-                size="lg" 
-                onClick={openChat}
-                className="text-base px-6 py-6 rounded-2xl"
-              >
-                <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
-                <span className="hidden sm:inline">Chat with Me</span>
-                <span className="sm:hidden">Chat</span>
-              </Button>
-            </div>
 
             {/* Action Buttons */}
             <nav className="flex flex-wrap justify-center gap-4 mt-6 animate-in slide-in-from-bottom-8 duration-700 delay-400" aria-label="Social media and contact links">
