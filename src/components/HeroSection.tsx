@@ -49,7 +49,7 @@ const HeroSection = () => {
             <ChatWidget 
               endpoint={CHAT_ENDPOINT} 
               title="Chat with Me" 
-              welcome="Hi! 👋 Ask me anything about my work, projects, or background. I'm happy to share specific details about my experience!" 
+              welcome={"Hi! Ask me anything about my work, projects, or even personal interests!\n\nI'm happy to share specific details about my experience!"}
               onClose={closeChat} 
             />
           </SheetContent>
@@ -70,7 +70,7 @@ const HeroSection = () => {
           <ChatWidget 
             endpoint={CHAT_ENDPOINT} 
             title="Chat with Me" 
-            welcome="Hi! 👋 Ask me anything about my work, projects, or background. I'm happy to share specific details about my experience!" 
+            welcome={"Hi! Ask me anything about my work, projects, or even personal interests!\n\nI'm happy to share specific details about my experience!"} 
             onClose={closeChat} 
           />
         ) : (
