@@ -45,7 +45,7 @@ const HeroSection = () => {
           aria-label="Hero section with profile information" 
         />
         <Sheet open={chatMode} onOpenChange={open => !open && closeChat()}>
-          <SheetContent side="bottom" className="h-[90vh] p-0 bg-black/80 backdrop-blur-xl border-t border-white/20 rounded-t-3xl">
+          <SheetContent side="bottom" className="h-[100dvh] max-h-[100dvh] p-0 bg-black/80 backdrop-blur-xl border-t border-white/20 rounded-t-3xl">
             <ChatWidget 
               endpoint={CHAT_ENDPOINT} 
               title="Chat with Me" 
