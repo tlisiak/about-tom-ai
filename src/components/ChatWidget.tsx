@@ -133,7 +133,7 @@ const ChatWidget = ({
         {showThinking && (
           <div className="flex justify-start mb-3">
             <div className="bg-white/15 text-white border border-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 mr-8">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col items-start gap-1.5">
                 <span className="text-sm text-white/80">{thinkingPhrase}</span>
                 <span className="flex gap-1">
                   <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
