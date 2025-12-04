@@ -10,24 +10,26 @@ const VECTOR_STORE_ID = "vs_6931e9c024a881919727cfa25da374bf";
 
 const SYSTEM_PROMPT = `You ARE Tommy - respond as yourself in first person.
 
-CRITICAL: You MUST use your file_search tool to look up information from your resume and documents BEFORE responding to ANY question about:
-- Your work history, experience, or roles
-- Companies you've worked at
-- Your skills, achievements, or metrics
-- Your education or background
-- Personal details like hobbies, pets, interests, etc.
+MANDATORY: For EVERY question about ANY of these topics, you MUST use file_search FIRST:
+- Work history, jobs, companies, roles (e.g., "Where did you work?", "What was your role at X?")
+- Skills, achievements, metrics, accomplishments
+- Education, background, qualifications  
+- Personal interests: soccer/football teams, hobbies, pets, favorite things
+- Projects, products, launches
+- Any specific names, dates, numbers, or facts about your life
 
-NEVER guess or make up information. If you can't find it in your documents, say "I don't have that information in my records."
+PROCESS:
+1. Receive question → 2. Use file_search tool → 3. Read results → 4. Respond based on findings
 
-Key guidelines:
-- Respond as yourself using "I", "my", "me" (e.g., "My dog's name is Paco", "I worked at Scout")
-- Be concise (2-4 sentences), friendly, and warm
-- Reference specific details, metrics, and achievements from your documents
-- Be authentic - this is YOUR personal website
-- If asked about topics unrelated to you, you can still help but keep responses brief`;
+If file_search returns no results, say "I don't have that specific information in my records."
+
+Response style:
+- First person ("I", "my", "me")
+- Concise (2-4 sentences), friendly, warm
+- Include specific details/metrics from documents
+- Be authentic - this is YOUR personal website`;
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -53,7 +55,7 @@ serve(async (req) => {
         'OpenAI-Beta': 'assistants=v2',
       },
       body: JSON.stringify({
-        model: 'gpt-4.1-mini',
+        model: 'gpt-5-nano-2025-08-07',
         name: "Tommy's Site Assistant",
         instructions: SYSTEM_PROMPT,
         tools: [{ type: 'file_search' }],
@@ -67,12 +69,12 @@ serve(async (req) => {
 
     if (!assistantResponse.ok) {
       const error = await assistantResponse.text();
-      console.error('Assistant creation error:', error);
+      console.error('❌ Assistant creation error:', error);
       throw new Error(`Failed to create assistant: ${error}`);
     }
 
     const assistant = await assistantResponse.json();
-    console.log('Assistant created:', assistant.id);
+    console.log('🤖 Assistant created:', assistant.id);
 
     // Create a thread
     const threadResponse = await fetch('https://api.openai.com/v1/threads', {
@@ -92,14 +94,14 @@ serve(async (req) => {
 
     if (!threadResponse.ok) {
       const error = await threadResponse.text();
-      console.error('Thread creation error:', error);
+      console.error('❌ Thread creation error:', error);
       throw new Error(`Failed to create thread: ${error}`);
     }
 
     const thread = await threadResponse.json();
-    console.log('Thread created:', thread.id);
+    console.log('📝 Thread created:', thread.id);
 
-    // Run the assistant with streaming
+    // Run the assistant with streaming and additional instructions
     const runResponse = await fetch(`https://api.openai.com/v1/threads/${thread.id}/runs`, {
       method: 'POST',
       headers: {
@@ -110,14 +112,17 @@ serve(async (req) => {
       body: JSON.stringify({
         assistant_id: assistant.id,
         stream: true,
+        additional_instructions: "IMPORTANT: You MUST use the file_search tool to answer this question. Search your documents first before responding. Do not guess or make up information.",
       }),
     });
 
     if (!runResponse.ok) {
       const error = await runResponse.text();
-      console.error('Run creation error:', error);
+      console.error('❌ Run creation error:', error);
       throw new Error(`Failed to create run: ${error}`);
     }
+
+    console.log('🚀 Run started with streaming');
 
     // Clean up assistant after response (fire and forget)
     const cleanupAssistant = async () => {
@@ -129,9 +134,9 @@ serve(async (req) => {
             'OpenAI-Beta': 'assistants=v2',
           },
         });
-        console.log('Assistant cleaned up:', assistant.id);
+        console.log('🧹 Assistant cleaned up:', assistant.id);
       } catch (e) {
-        console.error('Failed to cleanup assistant:', e);
+        console.error('❌ Failed to cleanup assistant:', e);
       }
     };
 
@@ -153,12 +158,39 @@ serve(async (req) => {
             try {
               const parsed = JSON.parse(data);
               
-              // Log tool usage for debugging
-              if (parsed.object === 'thread.run.step.delta') {
-                console.log('Tool step delta:', JSON.stringify(parsed));
+              // Comprehensive event logging
+              console.log(`📡 Event: ${parsed.object}`, parsed.status ? `Status: ${parsed.status}` : '');
+              
+              // Log run creation
+              if (parsed.object === 'thread.run.created') {
+                console.log('🚀 Run created:', parsed.id);
               }
+              
+              // Log step creation with type
               if (parsed.object === 'thread.run.step.created') {
-                console.log('Tool step created:', parsed.data?.step_details?.type);
+                console.log('📋 Step created:', parsed.step_details?.type);
+              }
+              
+              // Log step completion with tool call details
+              if (parsed.object === 'thread.run.step.completed') {
+                console.log('✅ Step completed:', parsed.step_details?.type);
+                if (parsed.step_details?.type === 'tool_calls') {
+                  const toolCalls = parsed.step_details.tool_calls;
+                  console.log('🔧 TOOL CALLS:', JSON.stringify(toolCalls, null, 2));
+                  toolCalls?.forEach((call: any, index: number) => {
+                    if (call.type === 'file_search') {
+                      console.log(`🔍 FILE SEARCH #${index + 1} EXECUTED`);
+                      if (call.file_search?.results) {
+                        console.log(`📄 Search results count: ${call.file_search.results.length}`);
+                      }
+                    }
+                  });
+                }
+              }
+              
+              // Log step delta for tool usage
+              if (parsed.object === 'thread.run.step.delta') {
+                console.log('🔄 Step delta:', JSON.stringify(parsed.delta?.step_details));
               }
               
               // Handle text delta events
@@ -176,13 +208,14 @@ serve(async (req) => {
               
               // Handle completion
               if (parsed.object === 'thread.run' && parsed.status === 'completed') {
+                console.log('✅ Run completed successfully');
                 controller.enqueue(new TextEncoder().encode('data: [DONE]\n\n'));
                 cleanupAssistant();
               }
               
               // Handle errors
               if (parsed.object === 'thread.run' && parsed.status === 'failed') {
-                console.error('Run failed:', parsed.last_error);
+                console.error('❌ Run failed:', parsed.last_error);
                 controller.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ error: 'Assistant run failed' })}\n\n`));
                 cleanupAssistant();
               }
@@ -204,7 +237,7 @@ serve(async (req) => {
     });
 
   } catch (error) {
-    console.error('Chat function error:', error);
+    console.error('❌ Chat function error:', error);
     return new Response(
       JSON.stringify({ 
         error: error instanceof Error ? error.message : 'Unknown error occurred' 
