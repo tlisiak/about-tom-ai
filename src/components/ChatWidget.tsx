@@ -85,7 +85,7 @@ const ChatWidget = ({
   return (
     <div 
       ref={containerRef}
-      className="flex flex-col h-[520px] md:h-[580px] w-full"
+      className="flex flex-col h-full max-h-[100dvh] md:h-[580px] md:max-h-none w-full"
       role="dialog"
       aria-label={title}
     >
