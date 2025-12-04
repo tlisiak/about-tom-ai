@@ -55,7 +55,7 @@ serve(async (req) => {
         'OpenAI-Beta': 'assistants=v2',
       },
       body: JSON.stringify({
-        model: 'gpt-5-nano-2025-08-07',
+        model: 'gpt-4o',
         name: "Tommy's Site Assistant",
         instructions: SYSTEM_PROMPT,
         tools: [{ type: 'file_search' }],
