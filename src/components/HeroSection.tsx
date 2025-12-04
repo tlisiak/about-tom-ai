@@ -74,11 +74,11 @@ const HeroSection = () => {
               </div>
               
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-                Hi there 👋 I'm Tommy, based in the San Francisco Bay Area, a product leader focused on the intersection of AI and impact. Most recently at Scout, I led product to help mission-driven companies win non-dilutive funding. Over the past 8 years, I've helped turn complex problems into elegant, scalable, and useful products across climate, finance, SaaS, and media, while building empowered, outcome-driven teams along the way.
+                ​Hi there 👋 I’m Tommy, a Bay Area–based product leader passionate about the intersection of AI and impact. At Scout, I lead product strategy and development for an AI-powered grant platform that’s helped 1,000+ users secure over $5M in funding. Over the past 8 years, I’ve built scalable systems and empowered teams that turn complex problems into meaningful, measurable outcomes across climate, SaaS, and media.
+
+Outside of work, I’m usually playing or watching soccer, experimenting in the kitchen, exploring trails, or hanging out with my partner and our dog, Paco.
               </p>
-              <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-                Outside of work, you'll usually find me playing or watching soccer, cooking something gourmet, hiking a new trail, tending to my plants, catching up with friends, reading, or hanging out with my partner and dog, Paco. Thanks for stopping by my little corner of the web!
-              </p>
+              
             </article>
 
             {/* Action Buttons */}
