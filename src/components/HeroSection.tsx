@@ -116,10 +116,9 @@ const HeroSection = () => {
             <aside className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
               <h2 className="text-2xl font-semibold text-white/90 drop-shadow">Fun Projects</h2>
               <nav className="flex flex-wrap justify-center gap-4" aria-label="Personal projects">
-                <Button ref={ctaButtonRef} variant="chat" size="lg" onClick={openChat} className="text-base px-6 py-6 rounded-2xl">
+                <Button ref={ctaButtonRef} variant="glass" size="lg" onClick={openChat} className="border-blue-300/60 hover:border-blue-200 hover:bg-blue-500/20">
                   <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
-                  <span className="hidden sm:inline">Chat with Me</span>
-                  <span className="sm:hidden">Chat</span>
+                  Chat with Me
                 </Button>
                 
                 <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
