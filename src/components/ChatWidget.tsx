@@ -4,6 +4,19 @@ import { Button } from "@/components/ui/button";
 import { useChat } from "@/hooks/useChat";
 import ChatMessage from "./ChatMessage";
 
+const THINKING_PHRASES = [
+  "Tommy's thinking really hard",
+  "Hmmmmm let me think",
+  "One sec, consulting my brain",
+  "Digging through my memories",
+  "Processing... beep boop 🤖",
+  "Ah, good question!",
+  "Let me check my notes",
+  "Tommy.exe is loading",
+  "Brewing up a response ☕",
+  "Hold on, neurons firing",
+];
+
 interface ChatWidgetProps {
   endpoint: string;
   title: string;
@@ -18,6 +31,7 @@ const ChatWidget = ({
   onClose 
 }: ChatWidgetProps) => {
   const [input, setInput] = useState("");
+  const [thinkingPhrase, setThinkingPhrase] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,6 +40,14 @@ const ChatWidget = ({
     endpoint,
     welcomeMessage: welcome,
   });
+
+  // Pick random thinking phrase when loading starts
+  useEffect(() => {
+    if (isLoading) {
+      const randomIndex = Math.floor(Math.random() * THINKING_PHRASES.length);
+      setThinkingPhrase(THINKING_PHRASES[randomIndex]);
+    }
+  }, [isLoading]);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -112,7 +134,7 @@ const ChatWidget = ({
           <div className="flex justify-start mb-3">
             <div className="bg-white/15 text-white border border-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 mr-8">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-white/80">Tommy's thinking really hard</span>
+                <span className="text-sm text-white/80">{thinkingPhrase}</span>
                 <span className="flex gap-1">
                   <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                   <span className="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
