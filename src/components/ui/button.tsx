@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         glass: "bg-white/20 text-white border border-white/30 hover:bg-white/30 backdrop-blur-sm transition-all duration-300 hover:scale-105",
+        chat: "bg-gradient-to-r from-primary/30 to-accent/30 text-white border border-white/40 hover:border-white/60 hover:from-primary/40 hover:to-accent/40 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-primary/20 ring-1 ring-white/10 hover:ring-white/20",
       },
       size: {
         default: "h-10 px-4 py-2",
