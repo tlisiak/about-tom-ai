@@ -69,7 +69,10 @@ export const useChat = ({ endpoint, welcomeMessage, storageKey = 'tommy-chat-his
       .map(m => ({ role: m.role, content: m.content }));
 
     try {
-      const response = await fetch(endpoint, {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const chatUrl = `${supabaseUrl}/functions/v1/chat`;
+      
+      const response = await fetch(chatUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
