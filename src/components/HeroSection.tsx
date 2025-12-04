@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { Linkedin, Github, Mail, Cat, Trophy, FileText, MessageCircle } from "lucide-react";
+import { Linkedin, Github, Mail, Cat, Trophy, FileText, MessageCircle, Calendar } from "lucide-react";
 import ChatWidget from "./ChatWidget";
 
 const CHAT_ENDPOINT = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
@@ -136,6 +136,13 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                 <a href="mailto:tommylisiak@gmail.com" aria-label="Send email to Tommy Lisiak">
                   <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
                   Email
+                </a>
+              </Button>
+              
+              <Button variant="glass" size="lg" asChild>
+                <a href="https://calendar.app.google/Gprm21LzaVVUGQ9V8" target="_blank" rel="noopener noreferrer" aria-label="Book time with Tommy Lisiak">
+                  <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
+                  Book Time
                 </a>
               </Button>
             </nav>
