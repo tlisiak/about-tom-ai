@@ -40,7 +40,7 @@ const HeroSection = () => {
       }} aria-label="Hero section with profile information" />
         <Sheet open={chatMode} onOpenChange={open => !open && closeChat()}>
           <SheetContent side="bottom" className="h-[90vh] p-0 bg-black/80 backdrop-blur-xl border-t border-white/20 rounded-t-3xl">
-            <ChatWidget endpoint={CHAT_ENDPOINT} title="Talk with Tommy's AI" welcome="Hi! 👋 Ask me about Tommy's work, projects, or resume. I have access to his full background and can give you specific details." speakReplies={true} onClose={closeChat} />
+            <ChatWidget endpoint={CHAT_ENDPOINT} title="Chat with Me" welcome="Hi! 👋 Ask me about Tommy's work, projects, or resume. I have access to his full background and can give you specific details." speakReplies={true} onClose={closeChat} />
           </SheetContent>
         </Sheet>
       </>;
@@ -50,7 +50,7 @@ const HeroSection = () => {
   }} aria-label="Hero section with profile information">
       <main className="relative max-w-4xl mx-auto text-center backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
         {chatMode ? (/* Chat Mode */
-      <ChatWidget endpoint={CHAT_ENDPOINT} title="Talk with Tommy's AI" welcome="Hi! 👋 Ask me about Tommy's work, projects, or resume. I have access to his full background and can give you specific details." speakReplies={true} onClose={closeChat} />) : (/* Default Hero Content */
+      <ChatWidget endpoint={CHAT_ENDPOINT} title="Chat with Me" welcome="Hi! 👋 Ask me about Tommy's work, projects, or resume. I have access to his full background and can give you specific details." speakReplies={true} onClose={closeChat} />) : (/* Default Hero Content */
       <>
             {/* Profile Avatar */}
             <header className="relative">
