@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
+import { getVisitorId, createVisitorClient } from '@/lib/supabaseWithVisitor';
 
 export interface Message {
   id: string;
@@ -13,17 +13,6 @@ interface UseChatOptions {
   storageKey?: string;
 }
 
-// Generate or retrieve a persistent visitor ID
-const getVisitorId = (): string => {
-  const key = 'tommy-visitor-id';
-  let visitorId = localStorage.getItem(key);
-  if (!visitorId) {
-    visitorId = `visitor-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-    localStorage.setItem(key, visitorId);
-  }
-  return visitorId;
-};
-
 export const useChat = ({ welcomeMessage, storageKey = 'tommy-chat-history' }: UseChatOptions) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +20,9 @@ export const useChat = ({ welcomeMessage, storageKey = 'tommy-chat-history' }: U
   const conversationIdRef = useRef<string | null>(null);
   const visitorId = useRef(getVisitorId());
   const initialLoadDone = useRef(false);
+  
+  // Create visitor-aware Supabase client for RLS
+  const supabase = useMemo(() => createVisitorClient(visitorId.current), []);
 
   // Load messages from database on mount
   useEffect(() => {
