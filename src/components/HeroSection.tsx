@@ -280,10 +280,10 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
           </div>
 
           {/* Chat content - always rendered */}
-          <div className={`absolute inset-x-0 top-0 overflow-hidden transition-opacity duration-300 ease-in-out ${
+          <div className={`absolute inset-x-0 top-0 overflow-hidden flex flex-col transition-opacity duration-300 ease-in-out ${
             chatMode ? 'opacity-100 h-[550px]' : 'opacity-0 pointer-events-none h-0'
           }`}>
-            <ChatWidget 
+            <ChatWidget
               title="Chat with Me" 
               welcome={"Hi! Ask me anything about my work, projects, or even personal interests!\n\nI'm happy to share specific details about my experience!"} 
               onClose={closeChat} 
