@@ -51,16 +51,6 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
-				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
 			borderRadius: {
@@ -69,45 +59,27 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
-				'accordion-down': {
-					from: {
-						height: '0'
+				'pulse-subtle': {
+					'0%, 100%': {
+						opacity: '1'
 					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
+					'50%': {
+						opacity: '0.7'
 					}
 				},
-				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
+				'glow-subtle': {
+					'0%, 100%': {
+						boxShadow: '0 0 15px hsl(150 70% 55% / 0.5), 0 0 25px hsl(150 70% 55% / 0.3)'
 					},
-					to: {
-						height: '0'
+					'50%': {
+						boxShadow: '0 0 30px hsl(150 70% 55% / 0.7), 0 0 50px hsl(150 70% 55% / 0.4), 0 0 70px hsl(150 70% 55% / 0.2)'
 					}
-				},
-			'pulse-subtle': {
-				'0%, 100%': {
-					opacity: '1'
-				},
-				'50%': {
-					opacity: '0.7'
 				}
 			},
-			'glow-subtle': {
-				'0%, 100%': {
-					boxShadow: '0 0 15px hsl(150 70% 55% / 0.5), 0 0 25px hsl(150 70% 55% / 0.3)'
-				},
-				'50%': {
-					boxShadow: '0 0 30px hsl(150 70% 55% / 0.7), 0 0 50px hsl(150 70% 55% / 0.4), 0 0 70px hsl(150 70% 55% / 0.2)'
-				}
+			animation: {
+				'pulse-subtle': 'pulse-subtle 6s ease-in-out infinite',
+				'glow-subtle': 'glow-subtle 3s ease-in-out infinite'
 			}
-		},
-		animation: {
-			'accordion-down': 'accordion-down 0.2s ease-out',
-			'accordion-up': 'accordion-up 0.2s ease-out',
-			'pulse-subtle': 'pulse-subtle 6s ease-in-out infinite',
-			'glow-subtle': 'glow-subtle 3s ease-in-out infinite'
-		}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
