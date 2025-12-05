@@ -85,10 +85,26 @@ const HeroSection = () => {
     <>
       <section 
         ref={heroRef} 
-        className={`min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}
-        style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }} 
+        className={`min-h-screen flex items-center justify-center p-6 pb-8 relative transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}
         aria-label="Hero section with profile information"
       >
+        {/* Background image with responsive formats */}
+        <picture className="absolute inset-0">
+          <source 
+            srcSet="/lovable-uploads/background.webp" 
+            type="image/webp" 
+          />
+          <img 
+            src="/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png"
+            alt=""
+            className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
+            loading="eager"
+            fetchPriority="high"
+          />
+        </picture>
+        
         {/* Dark overlay for background */}
         <div className="absolute inset-0 bg-black/25" />
         
@@ -120,7 +136,7 @@ const HeroSection = () => {
               </div>
               
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-                ​Hi there 👋 I'm Tommy, a San Francisco Bay Area based product and startup leader passionate about the intersection of AI, sustainability and impact. I love building solutions that integrate with the human experience to make the world a better place. As Head of Product @ Scout, I lead product strategy and development for an AI-powered grant platform that's helped 1,000+ users secure over $10M+in funding. 
+                ​Hi there 👋 I'm Tommy, a San Francisco Bay Area based product and startup leader passionate about the intersection of AI, sustainability and impact. I love building solutions that integrate with the human experience to make the world a better place. As Head of Product @ Scout, I lead product strategy and development for an AI-powered grant platform that's helped 1,000+ users secure over $10M+ in funding. 
 
 Over the past 8 years, I've built scalable systems and empowered teams that turn complex problems into meaningful, measurable outcomes across energy, fintech, climate tech, SaaS, and media. 
 
