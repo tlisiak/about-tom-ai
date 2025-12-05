@@ -222,10 +222,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
               >
                 <a href="https://calendar.app.google/Gprm21LzaVVUGQ9V8" target="_blank" rel="noopener noreferrer" aria-label="Book time with Tommy Lisiak">
                   <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
-                  <span className="flex flex-col items-start leading-tight">
-                    <span>Book Time</span>
-                    <span className="text-[10px] text-white/60 font-normal">Let's connect</span>
-                  </span>
+                  Book Time
                 </a>
               </Button>
             </nav>
