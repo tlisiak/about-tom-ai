@@ -149,7 +149,7 @@ const ChatWidget = ({
               <button
                 key={question}
                 onClick={() => handleSuggestionClick(question)}
-                className="text-sm px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 hover:bg-white/20 hover:text-white hover:border-white/30 transition-all"
+                className="text-sm px-3 py-1.5 rounded-full bg-white/20 border border-white/25 text-white/90 hover:bg-white/30 hover:text-white hover:border-white/40 transition-all"
               >
                 {question}
               </button>
@@ -160,7 +160,7 @@ const ChatWidget = ({
         {/* Thinking indicator */}
         {showThinking && (
           <div className="flex justify-start mb-3">
-            <div className="bg-white/15 text-white border border-white/20 backdrop-blur-sm rounded-2xl px-4 py-3 mr-8">
+            <div className="bg-white/25 text-white border border-white/25 backdrop-blur-sm rounded-2xl px-4 py-3 mr-8">
               <div className="flex flex-col items-start gap-1.5">
                 <span className="text-sm text-white/80">{thinkingPhrase}</span>
                 <span className="flex gap-1">
@@ -195,7 +195,7 @@ const ChatWidget = ({
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me anything about my work or background..."
             disabled={isLoading}
-            className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 disabled:opacity-50 transition-all"
+            className="flex-1 bg-white/20 border border-white/25 rounded-xl px-4 py-2.5 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 disabled:opacity-50 transition-all"
             aria-label="Type your message"
           />
           <Button
