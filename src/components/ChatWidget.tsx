@@ -17,6 +17,12 @@ const THINKING_PHRASES = [
   "Hold on, neurons firing",
 ];
 
+const SUGGESTED_QUESTIONS = [
+  "What's your product philosophy?",
+  "Tell me about your work at Scout",
+  "What do you do for fun?",
+];
+
 interface ChatWidgetProps {
   endpoint: string;
   title: string;
@@ -78,9 +84,18 @@ const ChatWidget = ({
     }
   }, [input, isLoading, sendMessage]);
 
+  const handleSuggestionClick = useCallback((question: string) => {
+    if (!isLoading) {
+      sendMessage(question);
+    }
+  }, [isLoading, sendMessage]);
+
   // Check if we should show thinking indicator
   const lastMessage = messages[messages.length - 1];
   const showThinking = isLoading && (!lastMessage || lastMessage.role === 'user' || lastMessage.content === '');
+  
+  // Show suggestions only when there's just the welcome message
+  const showSuggestions = messages.length === 1 && messages[0].role === 'assistant' && !isLoading;
 
   return (
     <div 
@@ -129,6 +144,21 @@ const ChatWidget = ({
             content={message.content}
           />
         ))}
+        
+        {/* Suggested questions */}
+        {showSuggestions && (
+          <div className="flex flex-wrap gap-2 mt-3 mb-2">
+            {SUGGESTED_QUESTIONS.map((question) => (
+              <button
+                key={question}
+                onClick={() => handleSuggestionClick(question)}
+                className="text-sm px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 hover:bg-white/20 hover:text-white hover:border-white/30 transition-all"
+              >
+                {question}
+              </button>
+            ))}
+          </div>
+        )}
         
         {/* Thinking indicator */}
         {showThinking && (
