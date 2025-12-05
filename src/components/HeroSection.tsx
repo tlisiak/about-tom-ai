@@ -11,12 +11,34 @@ const HeroSection = () => {
   const [chatMode, setChatMode] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [pullProgress, setPullProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [displayMode, setDisplayMode] = useState<'hero' | 'chat'>('hero');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const ctaButtonRef = useRef<HTMLButtonElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   
   // Swipe gesture state
   const touchStartY = useRef<number | null>(null);
   const sheetContentRef = useRef<HTMLDivElement>(null);
+
+  // Page load fade-in
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle chat mode transitions with crossfade
+  useEffect(() => {
+    const targetMode = chatMode ? 'chat' : 'hero';
+    if (targetMode !== displayMode) {
+      setIsTransitioning(true);
+      const timer = setTimeout(() => {
+        setDisplayMode(targetMode);
+        setIsTransitioning(false);
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [chatMode, displayMode]);
 
   // Detect mobile
   useEffect(() => {
@@ -133,12 +155,13 @@ const HeroSection = () => {
   return (
     <section 
       ref={heroRef} 
-      className="min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative" 
+      className={`min-h-screen flex items-center justify-center p-6 pb-8 bg-cover bg-center bg-no-repeat relative transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}
       style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }} 
       aria-label="Hero section with profile information"
     >
-      <main className="relative max-w-4xl mx-auto text-center backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
-        {chatMode ? (
+      <main className="relative max-w-4xl mx-auto text-center backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden min-h-[580px] md:min-h-[650px]">
+        <div className={`transition-opacity duration-200 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        {displayMode === 'chat' ? (
           <ChatWidget 
             title="Chat with Me" 
             welcome={"Hi! Ask me anything about my work, projects, or even personal interests!\n\nI'm happy to share specific details about my experience!"} 
@@ -272,6 +295,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
             </footer>
           </>
         )}
+        </div>
       </main>
     </section>
   );
