@@ -1,8 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { usePageView } from "@/hooks/usePageView";
 
 const NotFound = () => {
   const location = useLocation();
+  usePageView(location.pathname);
 
   useEffect(() => {
     console.error(
