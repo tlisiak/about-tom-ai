@@ -97,12 +97,12 @@ const ChatWidget = ({
   return (
     <div 
       ref={containerRef}
-      className="flex flex-col h-full w-full"
+      className="grid grid-rows-[auto_1fr_auto] h-full w-full"
       role="dialog"
       aria-label={title}
     >
       {/* Header */}
-      <header className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-white/20">
+      <header className="flex items-center justify-between px-4 py-3 border-b border-white/20">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
@@ -129,7 +129,7 @@ const ChatWidget = ({
 
       {/* Messages */}
       <div 
-        className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-1"
+        className="overflow-y-auto px-4 py-4 space-y-1"
         aria-live="polite"
         aria-atomic="false"
         data-chat-messages
@@ -186,7 +186,7 @@ const ChatWidget = ({
       </div>
 
       {/* Input */}
-      <footer className="flex-shrink-0 border-t border-white/20 p-4">
+      <footer className="border-t border-white/20 p-4">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <input
             ref={inputRef}
