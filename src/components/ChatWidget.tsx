@@ -24,14 +24,12 @@ const SUGGESTED_QUESTIONS = [
 ];
 
 interface ChatWidgetProps {
-  endpoint: string;
   title: string;
   welcome: string;
   onClose: () => void;
 }
 
 const ChatWidget = ({ 
-  endpoint, 
   title, 
   welcome, 
   onClose 
@@ -43,7 +41,6 @@ const ChatWidget = ({
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { messages, isLoading, error, sendMessage, clearHistory } = useChat({
-    endpoint,
     welcomeMessage: welcome,
   });
 
