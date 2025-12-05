@@ -9,12 +9,26 @@ const corsHeaders = {
 // Persistent assistant ID - created once via OpenAI dashboard or API
 const ASSISTANT_ID = Deno.env.get('OPENAI_ASSISTANT_ID') || '';
 
+// Input validation constants
+const MAX_MESSAGE_LENGTH = 4000;
+const MAX_MESSAGES = 20;
+const MAX_PAYLOAD_SIZE = 100000; // 100KB
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    // Check content length header for basic payload size limit
+    const contentLength = req.headers.get('content-length');
+    if (contentLength && parseInt(contentLength) > MAX_PAYLOAD_SIZE) {
+      return new Response(
+        JSON.stringify({ error: 'Request payload too large' }),
+        { status: 413, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
     if (!OPENAI_API_KEY) {
       throw new Error('OPENAI_API_KEY is not configured');
@@ -28,6 +42,30 @@ serve(async (req) => {
 
     if (!messages || !Array.isArray(messages)) {
       throw new Error('Messages array is required');
+    }
+
+    // Validate message count
+    if (messages.length > MAX_MESSAGES) {
+      return new Response(
+        JSON.stringify({ error: `Too many messages. Maximum allowed: ${MAX_MESSAGES}` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate individual message lengths
+    for (const msg of messages) {
+      if (typeof msg.content !== 'string') {
+        return new Response(
+          JSON.stringify({ error: 'Invalid message format' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+      if (msg.content.length > MAX_MESSAGE_LENGTH) {
+        return new Response(
+          JSON.stringify({ error: `Message too long. Maximum allowed: ${MAX_MESSAGE_LENGTH} characters` }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
     }
 
     console.log('🤖 Using persistent assistant:', ASSISTANT_ID);
