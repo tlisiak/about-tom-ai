@@ -58,28 +58,39 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-			keyframes: {
-				'pulse-subtle': {
-					'0%, 100%': {
-						opacity: '1'
-					},
-					'50%': {
-						opacity: '0.7'
-					}
+		keyframes: {
+			'pulse-subtle': {
+				'0%, 100%': {
+					opacity: '1'
 				},
-				'glow-subtle': {
-					'0%, 100%': {
-						boxShadow: '0 0 15px hsl(150 70% 55% / 0.5), 0 0 25px hsl(150 70% 55% / 0.3)'
-					},
-					'50%': {
-						boxShadow: '0 0 30px hsl(150 70% 55% / 0.7), 0 0 50px hsl(150 70% 55% / 0.4), 0 0 70px hsl(150 70% 55% / 0.2)'
-					}
+				'50%': {
+					opacity: '0.7'
 				}
 			},
-			animation: {
-				'pulse-subtle': 'pulse-subtle 6s ease-in-out infinite',
-				'glow-subtle': 'glow-subtle 3s ease-in-out infinite'
+			'glow-subtle': {
+				'0%, 100%': {
+					boxShadow: '0 0 15px hsl(150 70% 55% / 0.5), 0 0 25px hsl(150 70% 55% / 0.3)'
+				},
+				'50%': {
+					boxShadow: '0 0 30px hsl(150 70% 55% / 0.7), 0 0 50px hsl(150 70% 55% / 0.4), 0 0 70px hsl(150 70% 55% / 0.2)'
+				}
+			},
+			'fade-in-up': {
+				'0%': {
+					opacity: '0',
+					transform: 'translateY(10px)'
+				},
+				'100%': {
+					opacity: '1',
+					transform: 'translateY(0)'
+				}
 			}
+		},
+		animation: {
+			'pulse-subtle': 'pulse-subtle 6s ease-in-out infinite',
+			'glow-subtle': 'glow-subtle 3s ease-in-out infinite',
+			'fade-in-up': 'fade-in-up 0.5s ease-out forwards'
+		}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
