@@ -224,7 +224,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
         <SheetContent 
           ref={sheetContentRef}
           side="bottom" 
-          className={`p-0 bg-white/15 backdrop-blur-lg border-t border-white/25 rounded-t-3xl ${
+          className={`p-0 bg-black/40 backdrop-blur-lg border-t border-white/25 rounded-t-3xl ${
             isMobile 
               ? 'h-[95dvh] max-h-[95dvh]' 
               : 'h-[70vh] max-h-[600px] max-w-3xl mx-auto md:rounded-t-3xl md:border-x'
