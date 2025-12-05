@@ -12,18 +12,40 @@ const getVisitorId = (): string => {
   return visitorId;
 };
 
+// Session-based deduplication key for this path
+const getSessionKey = (path: string): string => `pageview-tracked-${path}`;
+
+// Check if page view was already tracked this session
+const wasTrackedThisSession = (path: string): boolean => {
+  return sessionStorage.getItem(getSessionKey(path)) === 'true';
+};
+
+// Mark page view as tracked for this session
+const markTrackedThisSession = (path: string): void => {
+  sessionStorage.setItem(getSessionKey(path), 'true');
+};
+
 export const usePageView = (path?: string) => {
   const tracked = useRef(false);
 
   useEffect(() => {
-    // Only track once per page load
+    // Only track once per component mount
     if (tracked.current) return;
     tracked.current = true;
+
+    const currentPath = path || window.location.pathname;
+
+    // Session-based deduplication - only track once per session per path
+    if (wasTrackedThisSession(currentPath)) {
+      return;
+    }
 
     const trackPageView = async () => {
       try {
         const visitorId = getVisitorId();
-        const currentPath = path || window.location.pathname;
+        
+        // Mark as tracked before async call to prevent race conditions
+        markTrackedThisSession(currentPath);
         
         await supabase.from('page_views').insert({
           visitor_id: visitorId,

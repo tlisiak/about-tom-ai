@@ -3,7 +3,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-forwarded-for',
 };
 
 // Persistent assistant ID - created once via OpenAI dashboard or API
@@ -14,12 +14,87 @@ const MAX_MESSAGE_LENGTH = 4000;
 const MAX_MESSAGES = 20;
 const MAX_PAYLOAD_SIZE = 100000; // 100KB
 
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 10; // 10 requests per minute per IP
+
+// In-memory rate limit store (resets on cold start, which is acceptable)
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+// Clean up old entries periodically
+const cleanupRateLimits = () => {
+  const now = Date.now();
+  for (const [key, value] of rateLimitStore.entries()) {
+    if (now > value.resetTime) {
+      rateLimitStore.delete(key);
+    }
+  }
+};
+
+// Get client IP from request
+const getClientIP = (req: Request): string => {
+  // Check common headers for proxied requests
+  const forwarded = req.headers.get('x-forwarded-for');
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  const realIP = req.headers.get('x-real-ip');
+  if (realIP) {
+    return realIP;
+  }
+  // Fallback - in edge functions, connection info isn't directly available
+  return 'unknown';
+};
+
+// Check rate limit and return remaining requests
+const checkRateLimit = (clientIP: string): { allowed: boolean; remaining: number; retryAfter?: number } => {
+  const now = Date.now();
+  const entry = rateLimitStore.get(clientIP);
+  
+  // Clean up old entries occasionally
+  if (Math.random() < 0.1) cleanupRateLimits();
+  
+  if (!entry || now > entry.resetTime) {
+    // New window
+    rateLimitStore.set(clientIP, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - 1 };
+  }
+  
+  if (entry.count >= MAX_REQUESTS_PER_WINDOW) {
+    const retryAfter = Math.ceil((entry.resetTime - now) / 1000);
+    return { allowed: false, remaining: 0, retryAfter };
+  }
+  
+  entry.count++;
+  return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - entry.count };
+};
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    // Rate limiting check
+    const clientIP = getClientIP(req);
+    const rateLimit = checkRateLimit(clientIP);
+    
+    if (!rateLimit.allowed) {
+      console.warn(`⚠️ Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(
+        JSON.stringify({ error: 'Too many requests. Please try again later.' }),
+        { 
+          status: 429, 
+          headers: { 
+            ...corsHeaders, 
+            'Content-Type': 'application/json',
+            'Retry-After': String(rateLimit.retryAfter || 60),
+            'X-RateLimit-Remaining': '0',
+          } 
+        }
+      );
+    }
+
     // Check content length header for basic payload size limit
     const contentLength = req.headers.get('content-length');
     if (contentLength && parseInt(contentLength) > MAX_PAYLOAD_SIZE) {
@@ -68,7 +143,7 @@ serve(async (req) => {
       }
     }
 
-    console.log('🤖 Using persistent assistant:', ASSISTANT_ID);
+    console.log('🤖 Using persistent assistant:', ASSISTANT_ID, `(IP: ${clientIP}, remaining: ${rateLimit.remaining})`);
 
     // Create a thread with all messages
     const threadResponse = await fetch('https://api.openai.com/v1/threads', {
@@ -183,6 +258,7 @@ serve(async (req) => {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
+        'X-RateLimit-Remaining': String(rateLimit.remaining),
       },
     });
 
