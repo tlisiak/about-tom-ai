@@ -1,4 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 export interface Message {
   id: string;
@@ -12,41 +13,146 @@ interface UseChatOptions {
   storageKey?: string;
 }
 
+// Generate or retrieve a persistent visitor ID
+const getVisitorId = (): string => {
+  const key = 'tommy-visitor-id';
+  let visitorId = localStorage.getItem(key);
+  if (!visitorId) {
+    visitorId = `visitor-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    localStorage.setItem(key, visitorId);
+  }
+  return visitorId;
+};
+
 export const useChat = ({ welcomeMessage, storageKey = 'tommy-chat-history' }: UseChatOptions) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const conversationIdRef = useRef<string | null>(null);
+  const visitorId = useRef(getVisitorId());
+  const initialLoadDone = useRef(false);
 
-  // Load messages from session storage on mount
+  // Load messages from database on mount
   useEffect(() => {
-    const stored = sessionStorage.getItem(storageKey);
-    if (stored) {
+    if (initialLoadDone.current) return;
+    initialLoadDone.current = true;
+
+    const loadConversation = async () => {
       try {
-        const parsed = JSON.parse(stored);
-        setMessages(parsed.map((m: Message) => ({
-          ...m,
-          timestamp: new Date(m.timestamp),
-        })));
+        // Check for existing conversation
+        const { data: conversations } = await supabase
+          .from('conversations')
+          .select('id')
+          .eq('visitor_id', visitorId.current)
+          .order('last_message_at', { ascending: false })
+          .limit(1);
+
+        if (conversations && conversations.length > 0) {
+          conversationIdRef.current = conversations[0].id;
+          
+          // Load messages for this conversation
+          const { data: dbMessages } = await supabase
+            .from('messages')
+            .select('*')
+            .eq('conversation_id', conversations[0].id)
+            .order('created_at', { ascending: true });
+
+          if (dbMessages && dbMessages.length > 0) {
+            const loadedMessages: Message[] = dbMessages.map(m => ({
+              id: m.id,
+              role: m.role as 'user' | 'assistant',
+              content: m.content,
+              timestamp: new Date(m.created_at),
+            }));
+            setMessages(loadedMessages);
+            return;
+          }
+        }
+
+        // No existing conversation or messages - show welcome
+        if (welcomeMessage) {
+          setMessages([{
+            id: 'welcome',
+            role: 'assistant',
+            content: welcomeMessage,
+            timestamp: new Date(),
+          }]);
+        }
       } catch (e) {
-        console.error('Failed to parse stored messages:', e);
+        console.error('Failed to load conversation:', e);
+        // Fallback to session storage
+        const stored = sessionStorage.getItem(storageKey);
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            setMessages(parsed.map((m: Message) => ({
+              ...m,
+              timestamp: new Date(m.timestamp),
+            })));
+          } catch {
+            if (welcomeMessage) {
+              setMessages([{
+                id: 'welcome',
+                role: 'assistant',
+                content: welcomeMessage,
+                timestamp: new Date(),
+              }]);
+            }
+          }
+        } else if (welcomeMessage) {
+          setMessages([{
+            id: 'welcome',
+            role: 'assistant',
+            content: welcomeMessage,
+            timestamp: new Date(),
+          }]);
+        }
       }
-    } else if (welcomeMessage) {
-      // Add welcome message if no history
-      setMessages([{
-        id: 'welcome',
-        role: 'assistant',
-        content: welcomeMessage,
-        timestamp: new Date(),
-      }]);
-    }
+    };
+
+    loadConversation();
   }, [storageKey, welcomeMessage]);
 
-  // Save messages to session storage
+  // Save messages to session storage as backup
   useEffect(() => {
-    if (messages.length > 0) {
+    if (messages.length > 0 && messages[0].id !== 'welcome') {
       sessionStorage.setItem(storageKey, JSON.stringify(messages));
     }
   }, [messages, storageKey]);
+
+  const saveMessageToDb = useCallback(async (message: Message) => {
+    try {
+      // Create conversation if needed
+      if (!conversationIdRef.current) {
+        const { data: newConvo } = await supabase
+          .from('conversations')
+          .insert({ visitor_id: visitorId.current })
+          .select('id')
+          .single();
+        
+        if (newConvo) {
+          conversationIdRef.current = newConvo.id;
+        }
+      }
+
+      if (conversationIdRef.current && message.id !== 'welcome') {
+        // Save message
+        await supabase.from('messages').insert({
+          conversation_id: conversationIdRef.current,
+          role: message.role,
+          content: message.content,
+        });
+
+        // Update last_message_at
+        await supabase
+          .from('conversations')
+          .update({ last_message_at: new Date().toISOString() })
+          .eq('id', conversationIdRef.current);
+      }
+    } catch (e) {
+      console.error('Failed to save message:', e);
+    }
+  }, []);
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim() || isLoading) return;
@@ -61,6 +167,9 @@ export const useChat = ({ welcomeMessage, storageKey = 'tommy-chat-history' }: U
     setMessages(prev => [...prev, userMessage]);
     setIsLoading(true);
     setError(null);
+
+    // Save user message to DB
+    saveMessageToDb(userMessage);
 
     // Prepare messages for API (exclude welcome message)
     const apiMessages = [...messages, userMessage]
@@ -136,6 +245,16 @@ export const useChat = ({ welcomeMessage, storageKey = 'tommy-chat-history' }: U
         }
       }
 
+      // Save completed assistant message to DB
+      if (assistantContent) {
+        saveMessageToDb({
+          id: assistantId,
+          role: 'assistant',
+          content: assistantContent,
+          timestamp: new Date(),
+        });
+      }
+
     } catch (e) {
       console.error('Chat error:', e);
       setError(e instanceof Error ? e.message : 'Failed to send message');
@@ -144,10 +263,24 @@ export const useChat = ({ welcomeMessage, storageKey = 'tommy-chat-history' }: U
     } finally {
       setIsLoading(false);
     }
-  }, [messages, isLoading]);
+  }, [messages, isLoading, saveMessageToDb]);
 
-  const clearHistory = useCallback(() => {
+  const clearHistory = useCallback(async () => {
     sessionStorage.removeItem(storageKey);
+    
+    // Delete conversation from DB
+    if (conversationIdRef.current) {
+      try {
+        await supabase
+          .from('conversations')
+          .delete()
+          .eq('id', conversationIdRef.current);
+      } catch (e) {
+        console.error('Failed to delete conversation:', e);
+      }
+      conversationIdRef.current = null;
+    }
+    
     setMessages(welcomeMessage ? [{
       id: 'welcome',
       role: 'assistant',
