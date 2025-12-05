@@ -89,6 +89,9 @@ const HeroSection = () => {
         style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }} 
         aria-label="Hero section with profile information"
       >
+        {/* Dark overlay for background */}
+        <div className="absolute inset-0 bg-black/25" />
+        
         <main className="relative max-w-4xl w-full mx-auto backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
           <div className="text-center">
             {/* Profile Avatar */}
