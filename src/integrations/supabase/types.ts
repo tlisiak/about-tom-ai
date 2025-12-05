@@ -67,6 +67,39 @@ export type Database = {
           },
         ]
       }
+      page_views: {
+        Row: {
+          created_at: string | null
+          id: string
+          path: string
+          referrer: string | null
+          screen_height: number | null
+          screen_width: number | null
+          user_agent: string | null
+          visitor_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          path: string
+          referrer?: string | null
+          screen_height?: number | null
+          screen_width?: number | null
+          user_agent?: string | null
+          visitor_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          path?: string
+          referrer?: string | null
+          screen_height?: number | null
+          screen_width?: number | null
+          user_agent?: string | null
+          visitor_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
