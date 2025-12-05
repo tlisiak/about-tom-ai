@@ -8,12 +8,11 @@ export interface Message {
 }
 
 interface UseChatOptions {
-  endpoint: string;
   welcomeMessage?: string;
   storageKey?: string;
 }
 
-export const useChat = ({ endpoint, welcomeMessage, storageKey = 'tommy-chat-history' }: UseChatOptions) => {
+export const useChat = ({ welcomeMessage, storageKey = 'tommy-chat-history' }: UseChatOptions) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -145,7 +144,7 @@ export const useChat = ({ endpoint, welcomeMessage, storageKey = 'tommy-chat-his
     } finally {
       setIsLoading(false);
     }
-  }, [endpoint, messages, isLoading]);
+  }, [messages, isLoading]);
 
   const clearHistory = useCallback(() => {
     sessionStorage.removeItem(storageKey);
