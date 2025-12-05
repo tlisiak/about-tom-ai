@@ -262,7 +262,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                   href="https://redfoxlabs.co" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-white font-medium hover:text-white/90 transition-colors" 
+                  className="text-white font-medium relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left" 
                   aria-label="Visit Red Fox Labs website"
                 >
                   Red Fox Labs
