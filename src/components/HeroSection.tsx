@@ -144,12 +144,12 @@ const HeroSection = () => {
       style={{ backgroundImage: 'url(/lovable-uploads/f5f8febe-809a-47df-a2eb-cebc85bb6263.png)' }} 
       aria-label="Hero section with profile information"
     >
-      <main className="relative max-w-4xl w-full mx-auto backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden h-[720px] md:h-[680px]">
+      <main className="relative max-w-4xl w-full mx-auto backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden min-h-[600px]">
         {/* Container for overlay-based crossfade */}
-        <div className="relative h-full w-full">
+        <div className="relative w-full">
           {/* Hero content - always rendered */}
-          <div className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
-            chatMode ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          <div className={`transition-opacity duration-300 ease-in-out ${
+            chatMode ? 'opacity-0 pointer-events-none absolute inset-0' : 'opacity-100'
           }`}>
             <div className="text-center">
               {/* Profile Avatar */}
@@ -280,9 +280,9 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
           </div>
 
           {/* Chat content - always rendered */}
-          <div className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
-            chatMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}>
+          <div className={`transition-opacity duration-300 ease-in-out ${
+            chatMode ? 'opacity-100' : 'opacity-0 pointer-events-none absolute inset-0'
+          }`} style={{ minHeight: chatMode ? '550px' : undefined }}>
             <ChatWidget 
               title="Chat with Me" 
               welcome={"Hi! Ask me anything about my work, projects, or even personal interests!\n\nI'm happy to share specific details about my experience!"} 
