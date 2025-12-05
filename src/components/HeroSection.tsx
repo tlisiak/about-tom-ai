@@ -146,7 +146,7 @@ const HeroSection = () => {
     >
       <main className="relative max-w-4xl w-full mx-auto backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden min-h-[600px]">
         {/* Container for overlay-based crossfade */}
-        <div className="relative w-full min-h-[550px]">
+        <div className="relative w-full h-[550px]">
           {/* Hero content - always rendered */}
           <div className={`transition-opacity duration-300 ease-in-out ${
             chatMode ? 'opacity-0 pointer-events-none absolute inset-0' : 'opacity-100'
@@ -280,8 +280,8 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
           </div>
 
           {/* Chat content - always rendered */}
-          <div className={`absolute inset-x-0 top-0 overflow-hidden flex flex-col transition-opacity duration-300 ease-in-out ${
-            chatMode ? 'opacity-100 h-[550px]' : 'opacity-0 pointer-events-none h-0'
+          <div className={`absolute inset-0 transition-opacity duration-300 ease-in-out ${
+            chatMode ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}>
             <ChatWidget
               title="Chat with Me" 
