@@ -267,6 +267,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                 >
                   Red Fox Labs
                 </a>
+                {" "}(aka me)
               </p>
             </footer>
           </>
