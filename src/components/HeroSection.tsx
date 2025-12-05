@@ -5,8 +5,6 @@ import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Linkedin, Github, Mail, Cat, Trophy, FileText, MessageCircle, Calendar } from "lucide-react";
 import ChatWidget from "./ChatWidget";
 
-const CHAT_ENDPOINT = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
-
 const SWIPE_THRESHOLD = 80;
 
 const HeroSection = () => {
@@ -122,7 +120,6 @@ const HeroSection = () => {
               )}
             </div>
             <ChatWidget 
-              endpoint={CHAT_ENDPOINT} 
               title="Chat with Me" 
               welcome={"Hi! Ask me anything about my work, projects, or even personal interests!\n\nI'm happy to share specific details about my experience!"}
               onClose={closeChat} 
@@ -143,7 +140,6 @@ const HeroSection = () => {
       <main className="relative max-w-4xl mx-auto text-center backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
         {chatMode ? (
           <ChatWidget 
-            endpoint={CHAT_ENDPOINT} 
             title="Chat with Me" 
             welcome={"Hi! Ask me anything about my work, projects, or even personal interests!\n\nI'm happy to share specific details about my experience!"} 
             onClose={closeChat} 
