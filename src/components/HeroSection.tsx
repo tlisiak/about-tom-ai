@@ -202,13 +202,6 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                   Chat with Me
                 </Button>
                 
-                <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
-                  <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer" aria-label="Visit Red Fox Labs website">
-                    <Cat className="w-5 h-5 mr-2" aria-hidden="true" />
-                    Red Fox Labs
-                  </a>
-                </Button>
-                
                 <Button 
                   variant="glass" 
                   size="lg" 
@@ -218,6 +211,13 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                   <a href="https://goalpredict.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit Goal Predict app">
                     <Trophy className="w-5 h-5 mr-2" aria-hidden="true" />
                     Goal Predict
+                  </a>
+                </Button>
+                
+                <Button variant="glass" size="lg" className="border-orange-300/60 hover:border-orange-200 hover:bg-orange-500/20" asChild>
+                  <a href="https://redfoxlabs.co" target="_blank" rel="noopener noreferrer" aria-label="Visit Red Fox Labs website">
+                    <Cat className="w-5 h-5 mr-2" aria-hidden="true" />
+                    Red Fox Labs
                   </a>
                 </Button>
               </nav>
