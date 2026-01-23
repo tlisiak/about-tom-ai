@@ -209,7 +209,12 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                   </a>
                 </Button>
                 
-                <Button variant="glass" size="lg" asChild>
+                <Button 
+                  variant="glass" 
+                  size="lg" 
+                  className="border-purple-300/60 hover:border-purple-200 hover:bg-purple-500/20 shadow-[0_0_20px_hsl(270_70%_60%/0.4),0_0_35px_hsl(270_70%_60%/0.2)]" 
+                  asChild
+                >
                   <a href="https://goalpredict.app/" target="_blank" rel="noopener noreferrer" aria-label="Visit Goal Predict app">
                     <Trophy className="w-5 h-5 mr-2" aria-hidden="true" />
                     Goal Predict
