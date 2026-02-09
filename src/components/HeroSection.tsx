@@ -164,15 +164,15 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
               <h2 className="text-3xl font-semibold text-white/90 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>Experience</h2>
               <div className="space-y-3 text-left max-w-2xl mx-auto">
                 {[
-                  { initials: "S", color: "bg-emerald-500/40", company: "Scout", role: "Head of Product", dates: "Mar 2025 – Present" },
-                  { initials: "I", color: "bg-amber-500/40", company: "Inspire (Shell)", role: "Senior Product Manager", dates: "Nov 2021 – Mar 2025" },
-                  { initials: "WP", color: "bg-slate-400/40", company: "The Washington Post", role: "Product Manager, Zeus Technology", dates: "Apr 2020 – Nov 2021" },
-                  { initials: "A", color: "bg-sky-500/40", company: "Arcadia", role: "Product Manager, Utility Data", dates: "Aug 2019 – Mar 2020" },
-                  { initials: "X", color: "bg-violet-500/40", company: "XAPPmedia", role: "Product Manager, Voice UX", dates: "Jun 2017 – Jul 2019" },
+                  { logo: "/logos/scout.png", company: "Scout", role: "Head of Product", dates: "Mar 2025 – Present" },
+                  { logo: "/logos/inspire.png", company: "Inspire (Shell)", role: "Senior Product Manager", dates: "Nov 2021 – Mar 2025" },
+                  { logo: "/logos/wapo.png", company: "The Washington Post", role: "Product Manager, Zeus Technology", dates: "Apr 2020 – Nov 2021" },
+                  { logo: "/logos/arcadia.png", company: "Arcadia", role: "Product Manager, Utility Data", dates: "Aug 2019 – Mar 2020" },
+                  { logo: "/logos/xappmedia.png", company: "XAPPmedia", role: "Product Manager, Voice UX", dates: "Jun 2017 – Jul 2019" },
                 ].map((exp) => (
                   <div key={exp.company} className="flex items-center gap-4 py-3 border-b border-white/10 last:border-b-0">
-                    <div className={`w-10 h-10 rounded-full ${exp.color} flex items-center justify-center text-white text-sm font-bold shrink-0 backdrop-blur-sm border border-white/10`}>
-                      {exp.initials}
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 backdrop-blur-sm border border-white/10 overflow-hidden">
+                      <img src={exp.logo} alt={`${exp.company} logo`} className="w-6 h-6 object-contain" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-baseline gap-x-2">
