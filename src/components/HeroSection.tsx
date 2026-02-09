@@ -149,11 +149,11 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
               <Button 
                 variant="glass" 
                 size="lg" 
-                className="text-lg px-10 py-6 border-rose-400/70 hover:border-rose-300 hover:bg-rose-500/25 shadow-[0_0_25px_hsl(350_80%_60%/0.5),0_0_50px_hsl(350_80%_60%/0.25)] hover:shadow-[0_0_35px_hsl(350_80%_60%/0.6),0_0_70px_hsl(350_80%_60%/0.3)]" 
+                className="border-rose-400/70 hover:border-rose-300 hover:bg-rose-500/25 shadow-[0_0_25px_hsl(350_80%_60%/0.5),0_0_50px_hsl(350_80%_60%/0.25)] hover:shadow-[0_0_35px_hsl(350_80%_60%/0.6),0_0_70px_hsl(350_80%_60%/0.3)]" 
                 asChild
               >
                 <a href="https://calendar.app.google/Gprm21LzaVVUGQ9V8" target="_blank" rel="noopener noreferrer" aria-label="Book time with Tommy Lisiak">
-                  <Calendar className="w-6 h-6 mr-2" aria-hidden="true" />
+                  <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
                   Book Time
                 </a>
               </Button>
@@ -162,9 +162,9 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                 variant="glass" 
                 size="lg" 
                 onClick={openChat} 
-                className="text-lg px-10 py-6 border-green-300/60 hover:border-green-200 hover:bg-green-500/20 shadow-[0_0_25px_hsl(150_70%_55%/0.5),0_0_50px_hsl(150_70%_55%/0.25)] hover:shadow-[0_0_35px_hsl(150_70%_55%/0.6),0_0_70px_hsl(150_70%_55%/0.3)]"
+                className="border-green-300/60 hover:border-green-200 hover:bg-green-500/20 shadow-[0_0_25px_hsl(150_70%_55%/0.5),0_0_50px_hsl(150_70%_55%/0.25)] hover:shadow-[0_0_35px_hsl(150_70%_55%/0.6),0_0_70px_hsl(150_70%_55%/0.3)]"
               >
-                <MessageCircle className="w-6 h-6 mr-2" aria-hidden="true" />
+                <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
                 Chat with Me
               </Button>
             </div>
