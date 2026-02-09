@@ -110,9 +110,9 @@ const HeroSection = () => {
         
         <main className="relative max-w-4xl w-full mx-auto backdrop-blur-md bg-black/30 border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
           <div className="text-center">
-            {/* Profile Avatar */}
-            <header className="relative">
-              <Avatar className="w-32 h-32 mx-auto border-4 border-white/30 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105">
+            {/* Profile Header: Avatar + Name */}
+            <header className="relative flex flex-col md:flex-row items-center md:justify-center md:gap-8">
+              <Avatar className="w-32 h-32 border-4 border-white/30 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:scale-105 shrink-0">
                 <AvatarImage 
                   src="/lovable-uploads/00d98ff0-cea1-495b-a987-33713991e19b.png" 
                   alt="Tommy Lisiak - Product & Growth Leader | Tech & Sustainability Advocate" 
@@ -122,11 +122,7 @@ const HeroSection = () => {
                   TL
                 </AvatarFallback>
               </Avatar>
-            </header>
-
-            {/* Bio Section */}
-            <article className="space-y-6 mt-8">
-              <div className="space-y-2 animate-in slide-in-from-bottom-4 duration-700">
+              <div className="mt-6 md:mt-0 md:text-left space-y-2 animate-in slide-in-from-bottom-4 duration-700">
                 <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
                   Tommy Lisiak
                 </h1>
@@ -134,6 +130,10 @@ const HeroSection = () => {
                   Building products for people and progress
                 </p>
               </div>
+            </header>
+
+            {/* Bio Section */}
+            <article className="space-y-6 mt-8">
               
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
                 ​Hi there 👋 I'm Tommy, a San Francisco Bay Area based product and startup leader passionate about the intersection of AI, sustainability and impact. I love building solutions that integrate with the human experience to make the world a better place. As Head of Product @ Scout, I lead product strategy and development for an AI-powered grant platform that's helped 1,000+ users secure over $10M+ in funding. 
