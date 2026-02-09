@@ -181,8 +181,8 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                   { logo: "/logos/xappmedia.png", company: "XAPPmedia", role: "Product Manager, Voice UX", dates: "Jun 2017 – Jul 2019" },
                 ].map((exp) => (
                   <div key={exp.company} className="flex items-center gap-4 py-3 border-b border-white/10 last:border-b-0">
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 backdrop-blur-sm border border-white/10 overflow-hidden">
-                      <img src={exp.logo} alt={`${exp.company} logo`} className="w-6 h-6 object-contain" />
+                    <div className="w-10 h-10 flex items-center justify-center shrink-0">
+                      <img src={exp.logo} alt={`${exp.company} logo`} className="w-7 h-7 object-contain" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-baseline gap-x-2">
