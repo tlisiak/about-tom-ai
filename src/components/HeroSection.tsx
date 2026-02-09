@@ -144,48 +144,47 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
               </p>
             </article>
 
-            {/* Action Buttons */}
-            <nav className="flex flex-wrap justify-center gap-4 mt-6 animate-in slide-in-from-bottom-8 duration-700 delay-400" aria-label="Social media and contact links">
-              <Button variant="glass" size="lg" asChild>
-                <a href="https://www.linkedin.com/in/tommylisiak/" target="_blank" rel="noopener noreferrer" aria-label="Visit Tommy Lisiak's LinkedIn profile">
-                  <Linkedin className="w-5 h-5 mr-2" aria-hidden="true" />
-                  LinkedIn
-                </a>
-              </Button>
-              
-              <Button variant="glass" size="lg" asChild>
-                <a href="https://drive.google.com/file/d/1CRRtz-5OmoVZtvo1UJQX7Q0PDZ5ecZJD/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Download Tommy Lisiak's resume">
-                  <FileText className="w-5 h-5 mr-2" aria-hidden="true" />
-                  Resume
-                </a>
-              </Button>
-              
-              <Button variant="glass" size="lg" asChild>
-                <a href="https://github.com/tlisiak" target="_blank" rel="noopener noreferrer" aria-label="Visit Tommy Lisiak's GitHub profile">
-                  <Github className="w-5 h-5 mr-2" aria-hidden="true" />
-                  GitHub
-                </a>
-              </Button>
-              
-              <Button variant="glass" size="lg" asChild>
-                <a href="mailto:tommylisiak@gmail.com" aria-label="Send email to Tommy Lisiak">
-                  <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
-                  Email
-                </a>
-              </Button>
-              
+            {/* Primary CTA */}
+            <div className="mt-6 animate-in slide-in-from-bottom-8 duration-700 delay-400">
               <Button 
                 variant="glass" 
                 size="lg" 
-                className="border-rose-400/70 hover:border-rose-300 hover:bg-rose-500/25 shadow-[0_0_20px_hsl(350_80%_60%/0.4),0_0_35px_hsl(350_80%_60%/0.2)]" 
+                className="text-lg px-10 py-6 border-rose-400/70 hover:border-rose-300 hover:bg-rose-500/25 shadow-[0_0_25px_hsl(350_80%_60%/0.5),0_0_50px_hsl(350_80%_60%/0.25)] hover:shadow-[0_0_35px_hsl(350_80%_60%/0.6),0_0_70px_hsl(350_80%_60%/0.3)]" 
                 asChild
               >
                 <a href="https://calendar.app.google/Gprm21LzaVVUGQ9V8" target="_blank" rel="noopener noreferrer" aria-label="Book time with Tommy Lisiak">
-                  <Calendar className="w-5 h-5 mr-2" aria-hidden="true" />
+                  <Calendar className="w-6 h-6 mr-2" aria-hidden="true" />
                   Book Time
                 </a>
               </Button>
-            </nav>
+            </div>
+
+            {/* Experience Section */}
+            <section className="mt-10 space-y-4 animate-in slide-in-from-bottom-8 duration-700 delay-400">
+              <h2 className="text-3xl font-semibold text-white/90 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>Experience</h2>
+              <div className="space-y-3 text-left max-w-2xl mx-auto">
+                {[
+                  { initials: "S", color: "bg-emerald-500/40", company: "Scout", role: "Head of Product", dates: "Mar 2025 – Present" },
+                  { initials: "I", color: "bg-amber-500/40", company: "Inspire (Shell)", role: "Senior Product Manager", dates: "Nov 2021 – Mar 2025" },
+                  { initials: "WP", color: "bg-slate-400/40", company: "The Washington Post", role: "Product Manager, Zeus Technology", dates: "Apr 2020 – Nov 2021" },
+                  { initials: "A", color: "bg-sky-500/40", company: "Arcadia", role: "Product Manager, Utility Data", dates: "Aug 2019 – Mar 2020" },
+                  { initials: "X", color: "bg-violet-500/40", company: "XAPPmedia", role: "Product Manager, Voice UX", dates: "Jun 2017 – Jul 2019" },
+                ].map((exp) => (
+                  <div key={exp.company} className="flex items-center gap-4 py-3 border-b border-white/10 last:border-b-0">
+                    <div className={`w-10 h-10 rounded-full ${exp.color} flex items-center justify-center text-white text-sm font-bold shrink-0 backdrop-blur-sm border border-white/10`}>
+                      {exp.initials}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-baseline gap-x-2">
+                        <span className="text-white font-semibold">{exp.company}</span>
+                        <span className="text-white/50 text-sm">{exp.dates}</span>
+                      </div>
+                      <p className="text-white/70 text-sm">{exp.role}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
 
             {/* Fun Things Section */}
             <aside className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
@@ -223,8 +222,29 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
               </nav>
             </aside>
 
+            {/* Informal Links */}
+            <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-white/60 text-sm animate-in slide-in-from-bottom-10 duration-700 delay-500">
+              {[
+                { href: "https://www.linkedin.com/in/tommylisiak/", icon: Linkedin, label: "LinkedIn" },
+                { href: "https://drive.google.com/file/d/1CRRtz-5OmoVZtvo1UJQX7Q0PDZ5ecZJD/view?usp=sharing", icon: FileText, label: "Resume" },
+                { href: "https://github.com/tlisiak", icon: Github, label: "GitHub" },
+                { href: "mailto:tommylisiak@gmail.com", icon: Mail, label: "Email" },
+              ].map(({ href, icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={label === "Email" ? undefined : "_blank"}
+                  rel={label === "Email" ? undefined : "noopener noreferrer"}
+                  className="inline-flex items-center gap-1.5 hover:text-white transition-colors duration-200 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-white/60 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                >
+                  <Icon className="w-4 h-4" aria-hidden="true" />
+                  {label}
+                </a>
+              ))}
+            </div>
+
             {/* Footer text */}
-            <footer className="mt-12 pt-6 border-t border-white/20 animate-in slide-in-from-bottom-10 duration-700 delay-600">
+            <footer className="mt-8 pt-6 border-t border-white/20 animate-in slide-in-from-bottom-10 duration-700 delay-600">
               <p className="text-lg text-white/80" style={{ fontFamily: "'Caveat', cursive" }}>
                 Built by{" "}
                 <a 
