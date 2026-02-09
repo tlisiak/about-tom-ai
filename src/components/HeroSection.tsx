@@ -129,6 +129,25 @@ const HeroSection = () => {
                 <p className="text-2xl md:text-3xl font-light text-white/80 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>
                   Building products for people and progress
                 </p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 text-white/60 text-sm mt-3">
+                  {[
+                    { href: "https://www.linkedin.com/in/tommylisiak/", icon: Linkedin, label: "LinkedIn" },
+                    { href: "https://drive.google.com/file/d/1CRRtz-5OmoVZtvo1UJQX7Q0PDZ5ecZJD/view?usp=sharing", icon: FileText, label: "Resume" },
+                    { href: "https://github.com/tlisiak", icon: Github, label: "GitHub" },
+                    { href: "mailto:tommylisiak@gmail.com", icon: Mail, label: "Email" },
+                  ].map(({ href, icon: Icon, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={label === "Email" ? undefined : "_blank"}
+                      rel={label === "Email" ? undefined : "noopener noreferrer"}
+                      className="inline-flex items-center gap-1.5 hover:text-white transition-colors duration-200 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-white/60 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                    >
+                      <Icon className="w-3.5 h-3.5" aria-hidden="true" />
+                      {label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </header>
 
@@ -222,25 +241,6 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
             </aside>
 
             {/* Informal Links */}
-            <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-white/60 text-sm animate-in slide-in-from-bottom-10 duration-700 delay-500">
-              {[
-                { href: "https://www.linkedin.com/in/tommylisiak/", icon: Linkedin, label: "LinkedIn" },
-                { href: "https://drive.google.com/file/d/1CRRtz-5OmoVZtvo1UJQX7Q0PDZ5ecZJD/view?usp=sharing", icon: FileText, label: "Resume" },
-                { href: "https://github.com/tlisiak", icon: Github, label: "GitHub" },
-                { href: "mailto:tommylisiak@gmail.com", icon: Mail, label: "Email" },
-              ].map(({ href, icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={label === "Email" ? undefined : "_blank"}
-                  rel={label === "Email" ? undefined : "noopener noreferrer"}
-                  className="inline-flex items-center gap-1.5 hover:text-white transition-colors duration-200 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-white/60 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
-                >
-                  <Icon className="w-4 h-4" aria-hidden="true" />
-                  {label}
-                </a>
-              ))}
-            </div>
 
             {/* Footer text */}
             <footer className="mt-8 pt-6 border-t border-white/20 animate-in slide-in-from-bottom-10 duration-700 delay-600">
