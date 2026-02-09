@@ -130,7 +130,7 @@ const HeroSection = () => {
                 <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
                   Tommy Lisiak
                 </h1>
-                <p className="text-xl md:text-2xl font-light text-white/80 drop-shadow">
+                <p className="text-xl md:text-2xl font-light text-white/80 drop-shadow" style={{ fontFamily: "'Dancing Script', cursive" }}>
                   Building products for people and progress
                 </p>
               </div>
