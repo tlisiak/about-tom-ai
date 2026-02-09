@@ -145,7 +145,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
             </article>
 
             {/* Primary CTA */}
-            <div className="mt-6 animate-in slide-in-from-bottom-8 duration-700 delay-400">
+            <div className="mt-6 flex flex-wrap justify-center gap-4 animate-in slide-in-from-bottom-8 duration-700 delay-400">
               <Button 
                 variant="glass" 
                 size="lg" 
@@ -156,6 +156,16 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
                   <Calendar className="w-6 h-6 mr-2" aria-hidden="true" />
                   Book Time
                 </a>
+              </Button>
+              <Button 
+                ref={ctaButtonRef} 
+                variant="glass" 
+                size="lg" 
+                onClick={openChat} 
+                className="text-lg px-10 py-6 border-green-300/60 hover:border-green-200 hover:bg-green-500/20 shadow-[0_0_25px_hsl(150_70%_55%/0.5),0_0_50px_hsl(150_70%_55%/0.25)] hover:shadow-[0_0_35px_hsl(150_70%_55%/0.6),0_0_70px_hsl(150_70%_55%/0.3)]"
+              >
+                <MessageCircle className="w-6 h-6 mr-2" aria-hidden="true" />
+                Chat with Me
               </Button>
             </div>
 
@@ -190,17 +200,6 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
             <aside className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
               <h2 className="text-3xl font-semibold text-white/90 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>Fun Projects</h2>
               <nav className="flex flex-wrap justify-center gap-4" aria-label="Personal projects">
-                <Button 
-                  ref={ctaButtonRef} 
-                  variant="glass" 
-                  size="lg" 
-                  onClick={openChat} 
-                  className="border-green-300/60 hover:border-green-200 hover:bg-green-500/20 shadow-[0_0_20px_hsl(150_70%_55%/0.5),0_0_35px_hsl(150_70%_55%/0.3)]"
-                >
-                  <MessageCircle className="w-5 h-5 mr-2" aria-hidden="true" />
-                  Chat with Me
-                </Button>
-                
                 <Button 
                   variant="glass" 
                   size="lg" 
