@@ -1,36 +1,56 @@
 
 
-## Extend the Handwritten Character Across the Page
+## Restructure Page Layout: Experience Section, Book Time CTA, and Informal Links
 
-The Caveat font brings a warm, personal feel to your subtitle. Here's a plan to spread that character throughout the page without overdoing it -- keeping readability while adding personality.
+Three changes to reorganize the page hierarchy and add professional experience.
 
-### Changes
+### 1. Promote "Book Time" as the Primary CTA
 
-1. **Section header "Fun Projects"** -- Switch from default font to Caveat at a slightly larger size, making it feel like a handwritten label
+Replace the current row of equal-weight buttons with a single prominent "Book Time" button placed right after the bio. It will use a larger, more eye-catching style with a warm glow to stand out as the main action.
 
-2. **Footer text "Built by Red Fox Labs (aka me)"** -- Apply Caveat to give it a casual, personal sign-off feel
+### 2. Add an "Experience" Section
 
-3. **Button labels** -- Keep buttons in the default sans-serif font for clarity and tap-target readability (mixing cursive into small UI elements hurts usability)
+A new section between the bio/CTA area and Fun Projects, showing a concise timeline of your career. Each entry will have:
+- Company name (bold)
+- Role title
+- Date range
+- A short one-line highlight
 
-4. **Bio paragraph** -- Keep in sans-serif for readability since it's a long block of text
+Companies included (from your resume):
+| Company | Role | Dates |
+|---------|------|-------|
+| Scout | Head of Product | Mar 2025 -- Present |
+| Inspire (acquired by Shell) | Senior Product Manager | Nov 2021 -- Mar 2025 |
+| The Washington Post | Product Manager, Zeus Technology | Apr 2020 -- Nov 2021 |
+| Arcadia | Product Manager, Utility Data | Aug 2019 -- Mar 2020 |
+| XAPPmedia | Product Manager, Voice UX | Jun 2017 -- Jul 2019 |
 
-5. **Name "Tommy Lisiak"** -- Keep bold sans-serif for strong visual hierarchy, but optionally bump up the subtitle size slightly (e.g., text-2xl md:text-3xl) to give Caveat more presence
+The section header "Experience" will use the Caveat font to match the existing style. Each entry will be displayed in a clean, minimal card-like row with the company name, role, and dates -- no heavy borders, just subtle separators. Company logos won't be included as image files since we don't have them, but we can use text-based initials in small colored circles as visual anchors.
 
-### Summary of what gets Caveat
+### 3. Move LinkedIn, Resume, GitHub, Email to Informal Footer Links
 
-| Element | Font | Rationale |
-|---------|------|-----------|
-| Name (h1) | Sans-serif (unchanged) | Strong anchor/hierarchy |
-| Subtitle | Caveat (already done) | Personal touch |
-| Bio paragraph | Sans-serif (unchanged) | Readability for long text |
-| "Fun Projects" header | Caveat | Handwritten section label |
-| Button labels | Sans-serif (unchanged) | UI clarity |
-| Footer text | Caveat | Casual sign-off |
+Remove the four glass buttons (LinkedIn, Resume, GitHub, Email) from the main action area. Instead, place them as simple text links with small icons near the footer, below Fun Projects but above the "Built by Red Fox Labs" line. They'll appear as a casual row of links (e.g., `LinkedIn / Resume / GitHub / Email`) with hover underline effects matching the existing footer link style.
+
+### New Page Flow
+
+```text
+Avatar
+Name + Subtitle
+Bio paragraph
+[Book Time] (prominent CTA button)
+"Experience" (timeline section)
+"Fun Projects" (Chat with Me, Goal Predict, Red Fox Labs)
+LinkedIn / Resume / GitHub / Email (small inline links)
+--- border ---
+Built by Red Fox Labs (aka me)
+```
 
 ### Technical Details
 
-- Apply `style={{ fontFamily: "'Caveat', cursive" }}` to the h2 "Fun Projects" and footer p element in `src/components/HeroSection.tsx`
-- Optionally increase subtitle font size from `text-xl md:text-2xl` to `text-2xl md:text-3xl`
-- Bump footer and section header sizes slightly to account for Caveat rendering smaller than sans-serif at the same size
-- No new dependencies or files needed
+**File: `src/components/HeroSection.tsx`**
+- Remove the `<nav>` block with LinkedIn, Resume, GitHub, Email, and Book Time buttons (lines 148-188)
+- Add a standalone "Book Time" button with enhanced styling (larger, glowing) right after the bio `<article>`
+- Add an "Experience" section with a Caveat-styled h2 and a vertical list of roles with company initials, name, title, and dates
+- Add a new row of informal icon+text links (LinkedIn, Resume, GitHub, Email) between Fun Projects and the footer, styled as simple anchor tags with opacity and hover underline effects
+- Keep all existing imports; no new dependencies needed
 
