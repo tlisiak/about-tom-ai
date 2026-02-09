@@ -130,7 +130,7 @@ const HeroSection = () => {
                 <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
                   Tommy Lisiak
                 </h1>
-                <p className="text-xl md:text-2xl font-light text-white/80 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>
+                <p className="text-2xl md:text-3xl font-light text-white/80 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>
                   Building products for people and progress
                 </p>
               </div>
@@ -189,7 +189,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
 
             {/* Fun Things Section */}
             <aside className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
-              <h2 className="text-2xl font-semibold text-white/90 drop-shadow">Fun Projects</h2>
+              <h2 className="text-3xl font-semibold text-white/90 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>Fun Projects</h2>
               <nav className="flex flex-wrap justify-center gap-4" aria-label="Personal projects">
                 <Button 
                   ref={ctaButtonRef} 
@@ -225,7 +225,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
 
             {/* Footer text */}
             <footer className="mt-12 pt-6 border-t border-white/20 animate-in slide-in-from-bottom-10 duration-700 delay-600">
-              <p className="text-sm text-white/80">
+              <p className="text-lg text-white/80" style={{ fontFamily: "'Caveat', cursive" }}>
                 Built by{" "}
                 <a 
                   href="https://redfoxlabs.co" 
