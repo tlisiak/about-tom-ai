@@ -42,7 +42,7 @@ const ExperienceTimeline = () => {
 
                 {/* Content card */}
                 <div
-                  className={`md:w-1/2 flex items-start gap-3 ${
+                  className={`md:w-1/2 flex items-start gap-3 text-left ${
                     isLeft ? "md:justify-end md:text-right" : "md:justify-start md:text-left"
                   }`}
                 >
