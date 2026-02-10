@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Linkedin, Github, Mail, Cat, Trophy, FileText, MessageCircle, Calendar } from "lucide-react";
 import ChatWidget from "./ChatWidget";
+import ExperienceTimeline from "./ExperienceTimeline";
 
 const SWIPE_THRESHOLD = 80;
 
@@ -189,31 +190,7 @@ Outside of work, I'm usually playing or watching soccer, experimenting in the ki
             </div>
 
             {/* Experience Section */}
-            <section className="mt-10 space-y-4 animate-in slide-in-from-bottom-8 duration-700 delay-400">
-              <h2 className="text-3xl font-semibold text-white/90 drop-shadow" style={{ fontFamily: "'Caveat', cursive" }}>Experience</h2>
-              <div className="space-y-3 text-left max-w-2xl mx-auto">
-                {[
-                  { logo: "/logos/scout.png", company: "Scout", role: "Head of Product", dates: "Mar 2025 – Present" },
-                  { logo: "/logos/inspire.png", company: "Inspire (Shell)", role: "Senior Product Manager", dates: "Nov 2021 – Mar 2025" },
-                  { logo: "/logos/wapo.png", company: "The Washington Post", role: "Product Manager, Zeus Technology", dates: "Apr 2020 – Nov 2021" },
-                  { logo: "/logos/arcadia.png", company: "Arcadia", role: "Product Manager, Utility Data", dates: "Aug 2019 – Mar 2020" },
-                  { logo: "/logos/xappmedia.png", company: "XAPPmedia", role: "Product Manager, Voice UX", dates: "Jun 2017 – Jul 2019" },
-                ].map((exp) => (
-                  <div key={exp.company} className="flex items-center gap-4 py-3 border-b border-white/10 last:border-b-0">
-                    <div className="w-10 h-10 flex items-center justify-center shrink-0">
-                      <img src={exp.logo} alt={`${exp.company} logo`} className="w-7 h-7 object-contain" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-baseline gap-x-2">
-                        <span className="text-white font-semibold">{exp.company}</span>
-                        <span className="text-white/50 text-sm">{exp.dates}</span>
-                      </div>
-                      <p className="text-white/70 text-sm">{exp.role}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+            <ExperienceTimeline />
 
             {/* Fun Things Section */}
             <aside className="mt-8 space-y-4 animate-in slide-in-from-bottom-10 duration-700 delay-500">
