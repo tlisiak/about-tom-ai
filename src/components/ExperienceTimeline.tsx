@@ -61,15 +61,15 @@ const ExperienceTimeline = () => {
 
                   {/* Text */}
                   <div className="min-w-0">
-                    <div
-                      className={`flex flex-wrap items-baseline gap-x-2 ${
-                        isLeft ? "md:justify-end" : ""
-                      }`}
-                    >
-                      <span className="text-white font-semibold">{exp.company}</span>
-                      <span className="text-white/50 text-sm">{exp.dates}</span>
-                    </div>
-                    <p className="text-white/70 text-sm">{exp.role}</p>
+                    <p className={`text-white font-semibold ${isLeft ? "md:text-right" : ""}`}>
+                      {exp.company}
+                    </p>
+                    <p className={`text-white/70 text-sm ${isLeft ? "md:text-right" : ""}`}>
+                      {exp.role}
+                    </p>
+                    <p className={`text-white/50 text-xs mt-0.5 ${isLeft ? "md:text-right" : ""}`}>
+                      {exp.dates}
+                    </p>
                   </div>
                 </div>
               </div>
