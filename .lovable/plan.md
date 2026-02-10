@@ -1,56 +1,52 @@
 
 
-## Restructure Page Layout: Experience Section, Book Time CTA, and Informal Links
+## Make the Experience Section an Alternating Timeline
 
-Three changes to reorganize the page hierarchy and add professional experience.
+Transform the current list-style experience section into a visually engaging alternating timeline where entries appear on alternating left and right sides of a central vertical line on desktop/tablet, and stack vertically on mobile.
 
-### 1. Promote "Book Time" as the Primary CTA
+### Design
 
-Replace the current row of equal-weight buttons with a single prominent "Book Time" button placed right after the bio. It will use a larger, more eye-catching style with a warm glow to stand out as the main action.
+On desktop/tablet (md and up):
+- A vertical line runs down the center of the section
+- Odd entries (1st, 3rd, 5th) appear on the left side, right-aligned toward the center line
+- Even entries (2nd, 4th) appear on the right side, left-aligned toward the center line
+- Each entry has a small dot/circle on the center line connecting it to the timeline
+- The date range appears closest to the line, with company name and role extending outward
 
-### 2. Add an "Experience" Section
+On mobile:
+- The vertical line shifts to the left edge
+- All entries stack on the right side of the line
+- Dots remain on the line for visual continuity
 
-A new section between the bio/CTA area and Fun Projects, showing a concise timeline of your career. Each entry will have:
-- Company name (bold)
-- Role title
-- Date range
-- A short one-line highlight
-
-Companies included (from your resume):
-| Company | Role | Dates |
-|---------|------|-------|
-| Scout | Head of Product | Mar 2025 -- Present |
-| Inspire (acquired by Shell) | Senior Product Manager | Nov 2021 -- Mar 2025 |
-| The Washington Post | Product Manager, Zeus Technology | Apr 2020 -- Nov 2021 |
-| Arcadia | Product Manager, Utility Data | Aug 2019 -- Mar 2020 |
-| XAPPmedia | Product Manager, Voice UX | Jun 2017 -- Jul 2019 |
-
-The section header "Experience" will use the Caveat font to match the existing style. Each entry will be displayed in a clean, minimal card-like row with the company name, role, and dates -- no heavy borders, just subtle separators. Company logos won't be included as image files since we don't have them, but we can use text-based initials in small colored circles as visual anchors.
-
-### 3. Move LinkedIn, Resume, GitHub, Email to Informal Footer Links
-
-Remove the four glass buttons (LinkedIn, Resume, GitHub, Email) from the main action area. Instead, place them as simple text links with small icons near the footer, below Fun Projects but above the "Built by Red Fox Labs" line. They'll appear as a casual row of links (e.g., `LinkedIn / Resume / GitHub / Email`) with hover underline effects matching the existing footer link style.
-
-### New Page Flow
+### Layout Structure (Desktop)
 
 ```text
-Avatar
-Name + Subtitle
-Bio paragraph
-[Book Time] (prominent CTA button)
-"Experience" (timeline section)
-"Fun Projects" (Chat with Me, Goal Predict, Red Fox Labs)
-LinkedIn / Resume / GitHub / Email (small inline links)
---- border ---
-Built by Red Fox Labs (aka me)
+   Scout  Mar 2025 - Present   |
+   Head of Product             o----
+                               |
+                          ----o|   Inspire (Shell)  Nov 2021 - Mar 2025
+                               |   Senior Product Manager
+                               |
+   The Washington Post         |
+   PM, Zeus Technology    ----o|
+                               |
+                          ----o|   Arcadia  Aug 2019 - Mar 2020
+                               |   PM, Utility Data
+                               |
+   XAPPmedia                   |
+   PM, Voice UX           ----o|
 ```
 
 ### Technical Details
 
 **File: `src/components/HeroSection.tsx`**
-- Remove the `<nav>` block with LinkedIn, Resume, GitHub, Email, and Book Time buttons (lines 148-188)
-- Add a standalone "Book Time" button with enhanced styling (larger, glowing) right after the bio `<article>`
-- Add an "Experience" section with a Caveat-styled h2 and a vertical list of roles with company initials, name, title, and dates
-- Add a new row of informal icon+text links (LinkedIn, Resume, GitHub, Email) between Fun Projects and the footer, styled as simple anchor tags with opacity and hover underline effects
-- Keep all existing imports; no new dependencies needed
+
+1. Replace the current experience `<div className="space-y-3 text-left max-w-2xl mx-auto">` block with a new timeline layout using CSS Grid or flexbox
+2. Use a `relative` container with a pseudo-element (`before:`) for the central vertical line
+3. Each entry will be positioned using grid columns or flex with alternating `md:flex-row-reverse` for left/right placement
+4. Add small timeline dots using pseudo-elements or a styled `<div>` element
+5. On mobile (`< md`), collapse to a single-column layout with the line on the left
+6. Company logos will appear alongside each entry as they do now
+7. Keep the Caveat font header and existing animation classes
+8. No new dependencies needed -- pure Tailwind CSS implementation
 
