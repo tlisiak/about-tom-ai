@@ -156,11 +156,16 @@ const HeroSection = () => {
             <article className="space-y-6 mt-8">
               
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
-                ​Hi there 👋 I'm Tommy, a San Francisco Bay Area based product and startup leader passionate about the intersection of AI, sustainability and impact. I love building solutions that integrate with the human experience to make the world a better place. As Head of Product @ Scout, I lead product strategy and development for an AI-powered grant platform that's helped 1,000+ users secure over $10M+ in funding. 
-
-Over the past 8 years, I've built scalable systems and empowered teams that turn complex problems into meaningful, measurable outcomes across energy, fintech, climate tech, SaaS, and media. 
-
-Outside of work, I'm usually playing or watching soccer, experimenting in the kitchen, exploring new trails, or hanging out with my fiancée and our dog, Paco.
+                ​Hi there 👋 I'm Tommy, a San Francisco Bay Area based product and startup leader passionate about the intersection of AI, sustainability and impact. I love building solutions that integrate with the human experience to make the world a better place.
+              </p>
+              <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
+                As Head of Product @ Scout, I lead product strategy and development for an AI-powered grant platform that's helped 1,000+ users secure over $10M+ in funding.
+              </p>
+              <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
+                Over the past 8 years, I've built scalable systems and empowered teams that turn complex problems into meaningful, measurable outcomes across energy, fintech, climate tech, SaaS, and media.
+              </p>
+              <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-6 duration-700 delay-200 drop-shadow">
+                Outside of work, I'm usually playing or watching soccer, experimenting in the kitchen, exploring new trails, or hanging out with my fiancée and our dog, Paco.
               </p>
             </article>
 
